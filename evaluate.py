@@ -6,7 +6,44 @@ api = LoLAPI(key)
 
 
 """
-TODO: Write something legitimate here 
+Overview
+-----------------------
+The user will input in their summoner name into the search bar, and requests 
+will be made to the League API to get all of the necessary information.
+
+Champion Information is returned in the form:
+[u'champion_name', {stats}]. 
+
+Players' rating information is returned in the form:
+['name', rating]
+"""
+
+
+def get_tier(tier):
+	""" Take a string form of a tier and return the corresponding number value for placements. """ 
+	
+	return {
+		'CHALLENGER': 500,
+		'DIAMOND': 400,
+		'PLATINUM': 300,
+		'GOLD': 200,
+		'SILVER': 100,
+		'BRONZE': 0
+	} [tier]
+
+def get_division(division):
+	""" Take a string form of a division and return the corresponding number value for placements. 
+	Special note: Challenger players do not have a tier. """
+	return {
+		'I': 100,
+		'II': 80,
+		'III': 60,
+		'IV': 40,
+		'V': 20 	
+	} [division]
+
+"""
+TODO: Use methods and different files 
 
 - Retrieve summoner info by name, extract ID  
 - ID used to ranked status. Necessary info includes:
@@ -25,35 +62,32 @@ summoner_info = api.get_summoner_by_name(self_summoner_name)
 summoner_id = summoner_info['id'] #Summoner ID used to reduce API calls.
 summoner_stats = api.get_ranked_stats_by_id(summoner_id, 3)
 
-"""
+
 #TODO: Replace with properly function league division/tier comparisons
 #Form of [summoner_name, points], with each tier = 100 points and each division = 20 points
 self_league = []
 others_league = []
 
 #self_league_data = api.get_league_data_by_id(summoner_id)
+
+#Tier data represented in the form of a dictionary of LeagueItemDto values.
 others_league_data = api.get_league_data_by_summoner(other_summoner_name)
+others_league_tiers = others_league_data['19629093']['entries'][0]
 
 self_league.append(self_summoner_name)
 others_league.append(other_summoner_name)
 
-print(others_league_data)
 
+#Go through data of other players to determine their rating. 
+others_rating = 0
+others_rating += get_tier(others_league_tiers['tier'])
+others_rating += get_division(others_league_tiers['rank'])
 
-others_league.append(others_league_data[u'rank'])
-others_league.append(others_league_data[u'tier'])
+others_league.append(others_rating)
 
-for x in self_league:
-	print (x)
-
-"""
 
 #Data of champions: List[ChampionStatsDto]
 all_champions_info = summoner_stats['champions']
-
-#TODO: Make sure that key u'name' is valid because of random non-champion info.
-print("eqoudtkj25gn[r THIS INDEX: " + str(all_champions_info[23]))
-print
 
 
 #Stored as [name, {stat data values}] 
@@ -65,28 +99,28 @@ stats_to_track = ['TOTAL_SESSIONS_PLAYED', 'TOTAL_SESSIONS_WON', 'TOTAL_ASSISTS'
 names_to_track = ['Sona', 'Soraka', 'Janna', 'Taric', 'Elise', 'Annie', 'Fiddlesticks', 'Leona', 'Thresh', 'Zyra', 'Blitzcrank', 'Nami' ] 
 
 for x in range(len(all_champions_info)):
-	if x != 23:
+	#Used to keep track of all stats for specific champion
+	specific_champion = [] 
+	specific_champion_stats = {}
 
-		#Used to keep track of all stats for specific champion
-		specific_champion = [] 
-		specific_champion_stats = {}
+	current_champion  = all_champions_info[x]
+	champion_id = current_champion['id']
 
-		current_champion  = all_champions_info[x]
+	if champion_id != 0:
 		champion_name = current_champion['name']
+	if champion_name in names_to_track:
+		specific_champion.append(champion_name)
 
-		if champion_name in names_to_track:
-			specific_champion.append(champion_name)
+		#Data of specific champion stats: AggregatedStatsDto, which is stored as list of maps
+		champion_specific_stats = current_champion['stats']
 
-			#Data of specific champion stats: AggregatedStatsDto, which is stored as list of maps
-			champion_specific_stats = current_champion['stats']
+		for x in champion_specific_stats:
+			if (x['name']) in stats_to_track:
+				specific_champion_stats[x['name']] = x['value']
 
-			for x in champion_specific_stats:
-				if (x['name']) in stats_to_track:
-					specific_champion_stats[x['name']] = x['value']
-
-			#All information about one specific champion pushed into list element. 
-			specific_champion.append(specific_champion_stats)
-			listed_all_champ_stats.append(specific_champion)
+		#All information about one specific champion pushed into list element. 
+		specific_champion.append(specific_champion_stats)
+		listed_all_champ_stats.append(specific_champion)
 
 
 for x in listed_all_champ_stats:
