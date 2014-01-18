@@ -42,6 +42,21 @@ def get_division(division):
 		'V': 20 	
 	} [division]
 
+
+def get_most_played_champion(champions): 
+	""" Take a list of lists of the form [champion_data][name, stats], and return
+	the name of the most played champion. 
+	"""
+	most_played = ""
+	max_played = 0
+	for x in champions:
+		if x[1]['TOTAL_SESSIONS_PLAYED'] > max_played:
+			most_played = x[0]
+			max_played = x[1]['TOTAL_SESSIONS_PLAYED']
+
+	return most_played
+
+
 """
 TODO: Use methods and different files 
 
@@ -54,7 +69,7 @@ TODO: Use methods and different files
 """
 
 #TODO: replace with form and database information
-self_summoner_name = "Distrastic"
+self_summoner_name = "googleme85"
 other_summoner_name = "Orokai"
 
 #TODO: replace with form information
@@ -71,6 +86,7 @@ others_league = []
 #self_league_data = api.get_league_data_by_id(summoner_id)
 
 #Tier data represented in the form of a dictionary of LeagueItemDto values.
+others_summoner_id = api.get_summoner_by_name(other_summoner_name)
 others_league_data = api.get_league_data_by_summoner(other_summoner_name)
 others_league_tiers = others_league_data['19629093']['entries'][0]
 
@@ -106,24 +122,30 @@ for x in range(len(all_champions_info)):
 	current_champion  = all_champions_info[x]
 	champion_id = current_champion['id']
 
-	if champion_id != 0:
+
+	if champion_id != 0: #Weird issue of the 'combined' name which does not have a name field.
 		champion_name = current_champion['name']
-	if champion_name in names_to_track:
-		specific_champion.append(champion_name)
+		if champion_name in names_to_track:
+			specific_champion.append(champion_name)
 
-		#Data of specific champion stats: AggregatedStatsDto, which is stored as list of maps
-		champion_specific_stats = current_champion['stats']
+			#Data of specific champion stats: AggregatedStatsDto, which is stored as list of maps
+			champion_specific_stats = current_champion['stats']
 
-		for x in champion_specific_stats:
-			if (x['name']) in stats_to_track:
-				specific_champion_stats[x['name']] = x['value']
+			for x in champion_specific_stats:
+				if (x['name']) in stats_to_track:
+					specific_champion_stats[x['name']] = x['value']
 
-		#All information about one specific champion pushed into list element. 
-		specific_champion.append(specific_champion_stats)
-		listed_all_champ_stats.append(specific_champion)
+			#All information about one specific champion pushed into list element. 
+			specific_champion.append(specific_champion_stats)
+			listed_all_champ_stats.append(specific_champion)
 
 
+most_played_champion = get_most_played_champion(listed_all_champ_stats)
+
+
+''' TODO: Remove below, only exists for diagnostics. '''
 for x in listed_all_champ_stats:
 	print(x)
+print ("Most played champion: " + most_played_champion)
 
 
