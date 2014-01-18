@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html>
+<?php 
+  $summoner_name = $_GET["summoner"];
+  $processed = exec("python call_summoner_info.py .$summoner_name");
+  echo $processed;
+
+  function getResultsPage(){
+    window.location.href = "results.html";
+  }
+?>
   <head>
     <title>Find Me A Support League of Legends</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +41,7 @@
   <div class="container">
     <div class="col-md-8 col-md-offset-2">
         <div class="col-lg-12">
-          <form class="input-group form-inline" role="form" method="POST" action="summoner_process.php" id="summoner" onSubmit="window.open('results.html')">
+          <form class="input-group form-inline" role="form" method="POST" action="results.html" id="summoner" onSubmit="getResultsPage()">
             <input type="text" class="form-control" placeholder="Enter your summoner name here">
             <span class="input-group-btn">
                <button class="btn btn-info" type="submit">Search</button>
