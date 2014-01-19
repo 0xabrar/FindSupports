@@ -7,6 +7,8 @@ $summoner_id = 585897;
 $api = new riotapi('na');
 $r = $api->getSummonerByName($summoner_name);
 $summoner_id = $r['id'];
+$summoner_stats = getStats($summoner_id);
+$summoner_league = getLeague($summoner_id);
 
 //$r = $test->getSummoner($summoner_id);
 //$r = $test->getSummoner($summoner_id,'masteries');
