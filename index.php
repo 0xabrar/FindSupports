@@ -17,7 +17,7 @@
   <body>
     <style> body {background-image:url('Images/BackGround.jpg'); background-repeat: no-repeat; background-size: cover } </style>
 
-    <div class ="container" style="margin-top:10%">
+    <div class ="container" style="margin-top:12%">
       <div class="center-block">
         <!-- The div that holds the title -->
         <div class="center-block">
@@ -26,8 +26,6 @@
         </div>
       </div>
     </div>
-    <p style="text-align:center; font-style:bold; color:#FFFFFF">Get access to a list of all the support players near your skill level! Just search.</p>
-    <br></br>
 
   <div class="container">
     <div class="col-md-8 col-md-offset-2">
