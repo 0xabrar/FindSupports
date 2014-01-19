@@ -6,7 +6,7 @@ $summoner_id = 585897;
 
 $api = new riotapi('na');
 $r = $api->getSummonerByName($summoner_name);
-$r['id'];
+$summoner_id = $r['id'];
 
 //$r = $test->getSummoner($summoner_id);
 //$r = $test->getSummoner($summoner_id,'masteries');
