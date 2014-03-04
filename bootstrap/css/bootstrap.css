@@ -1637,7 +1637,6 @@ pre code {
 table {
   max-width: 100%;
   background-color: #becccf;
-  box-shadow: 20px 20px 50px black;
 }
 
 th {
@@ -1648,7 +1647,7 @@ th {
 .table {
   width: 100%;
   margin-bottom: 20px;
-  border-radius:0px;
+  border-radius:25px;
   opacity:0.9;
 }
 
@@ -1696,7 +1695,7 @@ th {
 }
 
 .table-bordered {
-  border: 3px solid #1b459f; 
+  border: 1px solid #dddddd;
 }
 
 .table-bordered > thead > tr > th,
