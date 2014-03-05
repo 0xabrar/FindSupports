@@ -18,24 +18,21 @@
   </head>
 <body>
 
+    
 
-print_r($r);
 
-?>
-
-    <style> body {background-image:url('Images/BackGround.jpg'); background-repeat: no-repeat; background-size: cover } </style>
+    <style> body {background-image:url("./images/background.png"); background-repeat: no-repeat; background-size: cover } </style>
 
     <div class ="container" style="margin-top:10%">
       <div class="center-block">
         <!-- The div that holds the title -->
         <div class="center-block">
-          <a href ="main.html"> <img src="images/logo.png" class="center-block"> 
+          <a href ="index.php"> <img src="images/logo.png" class="center-block"> 
           </img> </a>
         </div>
       </div>
     </div>
-    <p style="text-align:center; font-style:bold; color:#FFFFFF">Get access to a list of all the support players near your skill level! Just search.</p>
-    <br></br>
+  
 
     <div class ="container" style="margin-top:0%">
       <div class="center-block">
@@ -65,7 +62,7 @@ print_r($r);
             </tr>  
             <tr>  
               <td>002</td>  
-              <td>Smita</td>  
+              <td><?php echo $_GET["summoner"]; ?></td>  
               <td>Pallod</td>  
               <td>A</td>   
               <td>A+</td>   
@@ -104,6 +101,11 @@ print_r($r);
         </div>
       </div>
     </div>
+
+  <div style="position:relative; text-align:center;">
+    <p style="position:fixed; bottom:0px; font-size:0.8em; width:100%; color:#B5B5B5"><small>FindMeASupport isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.
+      <small></p>  
+  </div>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://code.jquery.com/jquery.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->

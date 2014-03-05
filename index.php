@@ -15,13 +15,13 @@
     <![endif]-->
   </head>
   <body>
-    <style> body {background-image:url('Images/BackGround.jpg'); background-repeat: no-repeat; background-size: cover } </style>
+    <style> body {background-image:url("./images/background.png"); background-repeat: no-repeat; background-size: cover } </style>
 
     <div class ="container" style="margin-top:12%">
       <div class="center-block">
         <!-- The div that holds the title -->
         <div class="center-block">
-          <a href ="main.html"> <img src="images/logo.png" class="center-block"> 
+          <a href ="index.php"> <img src="images/logo.png" class="center-block"> 
           </img> </a>
         </div>
       </div>
@@ -30,8 +30,8 @@
   <div class="container">
     <div class="col-md-8 col-md-offset-2">
         <div class="col-lg-12">
-          <form class="input-group form-inline" role="form" method="POST" action="get_data.php" >
-            <input type="text" class="form-control" placeholder="Enter your summoner name here" name="summoner">
+          <form class="input-group form-inline" role="form" method="get" action="results.php">
+            <input type="text" class="form-control" placeholder="Enter your summoner name here" name="summoner"> 
             <span class="input-group-btn">
                <button class="btn btn-info" type="submit">Search</button>
             </span>
@@ -40,7 +40,7 @@
     </div>
   </div>
   <div style="position:relative; text-align:center;">
-    <p style="position:fixed; bottom:0px; font-size:0.8em; width:100%; color:#B5B5B5"><small>Find Me a Support isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.
+    <p style="position:fixed; bottom:0px; font-size:0.8em; width:100%; color:#B5B5B5"><small>FindMeASupport isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.
       <small></p>  
   </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
