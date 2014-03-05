@@ -30,7 +30,7 @@
   <div class="container">
     <div class="col-md-8 col-md-offset-2">
         <div class="col-lg-12">
-          <form class="input-group form-inline" role="form" method="get" action="results.php">
+          <form class="input-group form-inline" role="form" method="get" action="testing.php">
             <input type="text" class="form-control" placeholder="Enter your summoner name here" name="summoner"> 
             <span class="input-group-btn">
                <button class="btn btn-info" type="submit">Search</button>
