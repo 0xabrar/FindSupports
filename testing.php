@@ -17,11 +17,12 @@
 <body>
 
 <?php
-		include('player.php');	
+
+	include('player.php');	
 	//TODO: make different regions function for api calls
 	$summoner_name = $_GET["summoner"];
 	$player = new Player($summoner_name, "na");
-
+    
 
 ?>
 

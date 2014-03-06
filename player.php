@@ -13,22 +13,26 @@ class Player {
 	*/
 	
 	private $api;
-	private $name = "";
-	private $id = "";
+	private $name;
+	private $id;
 	private $games_played;
 	private $games_won;
-	private $win_percent = 0;
-	private $total_assists = 0;
-	private $most_played_champion = "";
-	private $lolking_profile = "";
+	private $win_percent;
+	private $avg_assists;
+	private $lolking_profile;
+	private $mmr = 0;
 
-	/* TODO: implement this functionality in
-	#Apparently used to keep track of important champion statistics.
-	stats_to_track = ['TOTAL_SESSIONS_PLAYED', 'TOTAL_SESSIONS_WON', 'TOTAL_ASSISTS', 'TOTAL_CHAMPION_KILLS', 'TOTAL_DEATHS_PER_SESSION']
-	#TODO: decide on support champions
-	names_to_track = ['Sona', 'Soraka', 'Janna', 'Taric', 'Elise', 'Annie', 'Fiddlesticks', 'Leona', 'Thresh', 'Zyra', 'Blitzcrank', 'Nami' ] 
-	*/
 
+	//Lists used to determine champions and stats to track when going through stat data.
+	private $stats_to_track = array('TOTAL_SESSIONS_PLAYED', 'TOTAL_SESSIONS_WON', 
+		'TOTAL_ASSISTS', 'TOTAL_CHAMPION_KILLS', 'TOTAL_DEATHS_PER_SESSION');
+	private $names_to_track = array('Sona', 'Soraka', 'Janna', 'Taric', 'Elise', 'Annie', 
+		'Fiddlesticks', 'Leona', 'Thresh', 'Zyra', 'Blitzcrank', 'Nami', 'Alistar');
+
+	//List of the data of champions that a Player plays.
+	private $support_champions = array();
+	//Stored as an array of all champion data for that most played support. 
+	private $most_played_support; 
 
 	/* TODO: would prefer to be able to use a Map like this, refactor
 	private function get_summoner_info($which_info) {
@@ -79,22 +83,48 @@ class Player {
 
 		//TODO: interact with database_player to see if player exists already.
 		$this->set_id();
-		echo $this->id;	
-		echo "<br><br>";
+		$this->lolking_profile = "http://www.lolking.net/summoner/na/" . $this->id;
+
+		$this->extract_support_champions();
+		$this->set_most_played_support();
+
 		$this->set_stats();
 
-		
+		$this->print_data();
+	}
+
+	//TODO: only used for diagnostics, remove after
+	private function print_data() {
+		echo "Name: " . $this->name . "<br>";
+		echo "ID: " . $this->id . "<br>";
+		echo "Games played: " . $this->games_played . "<br>";
+		echo "Games won: " . $this->games_won . "<br>";
+		echo "Win percent: " . $this->win_percent . "<br>";
+		echo "Average assists: " . $this->avg_assists . "<br>";
+		echo "lolking: " . $this->lolking_profile . "<br>";
+		echo "MMR: " . $this->mmr . "<br>";
+	}
+
+	private function set_stats() {
+		print_r($this->most_played_support);
+		echo "<br><br>";
+		$this->games_played = $this->most_played_support["stats"]["totalSessionsPlayed"];
+		$this->games_won = $this->most_played_support["stats"]["totalSessionsWon"];
+		$this->avg_assists = $this->most_played_support["stats"]["totalAssists"] / $this->games_played;
+		$this->win_percent= $this->games_won / $this->games_played * 100;
 	}
 
 	private function set_id() {
-		//Set the ID of the summoner to the one determined from making an API 
-		//call based on summoner name. 
+		/*Set the ID of the summoner to the one determined from making an API 
+		call based on summoner name. */
 		$summoner_api = $this->api->getSummonerByName($this->name);
 		$summoner = json_decode($summoner_api, true);
 		$this->id = $summoner["id"];
 	}
 
-	private function set_stats() {
+	private function extract_support_champions() {
+		/** Set the support champion info of the current Player instance. This will extract
+		all support champion information and place it into $support_champions. */
 		$summoner_api = $this->api->getStats($this->id, "ranked");
 		$summoner_stats = json_decode($summoner_api, true);
 		$summoner_stats = $summoner_stats["champions"];
@@ -102,14 +132,28 @@ class Player {
 		//Go through the stats related solely to champions and extract
 		//needed information from them.
 		foreach($summoner_stats as $champion ) {
-			print_r($champion);
 			$champion_name = $champion["name"];
-			print_r($champion_name);
-			echo "<br><br>";
+			//Only want to keep track of supports and not regular champions.
+			if  (in_array($champion_name, $this->names_to_track)) {
+				array_push($this->support_champions, $champion);
+			}
 		}
 	}
 
 
+	private function set_most_played_support() {
+		/** Go through the listing of support champions that the Player plays,
+		and then set the most played support as the champion with highest total sessions. */
+		$max = 0;
+		$most_played_support;
+		foreach($this->support_champions as $support) {
+			if ($support["stats"]["totalSessionsPlayed"] > $max) {
+				$max = $support["stats"]["totalSessionsPlayed"];
+				$most_played_support = $support;
+			}
+		}
+		$this->most_played_support = $most_played_support;
+	}
 
 	//Includes all of the getter functions for table data associated 
 	//with a specific player.
@@ -137,8 +181,8 @@ class Player {
 		return $this->total_assists;
 	}
 
-	public function get_most_played_champion() {
-		return $this->most_played_champion;
+	public function get_most_played_support() {
+		return $this->get_most_played_support;
 	}
 
 	public function get_lolking() {
