@@ -11,7 +11,6 @@ develop -> localhost testing
 localbranch -> incremental changes
 
 #####Functionality Needed
-1. Interact with API.
 2. Include relevant information to compare summoner skills.
 3. Add in MySQL database.
 4. Interact with MySQL database.
@@ -19,11 +18,13 @@ localbranch -> incremental changes
 6. Create a script to aid in populating the database.
 
 #####Sprint Details
-Interact with API:
-- call all of the summoner stats information and organize
-- complete get_most_played_champion function
-- too lazy to write remaining material
+Add in MySQL database:
+- create separate class for working with the database
+- complete player database constructor
+- determine some way decide whether to construct with API or database
+- add local database
 
 #####Changelog  
+- v1.2 Player class added working with API. (March 6 2014)
 - v1.1 Reorganized material, converted to PHP. (March 5 2014)
 - v1.0 Initial material added. (February 17 2014)

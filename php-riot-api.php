@@ -33,6 +33,7 @@ class riotapi {
 	const API_URL_1_1 = 'http://prod.api.pvp.net/api/lol/{region}/v1.1/';
 	const API_URL_1_2 = 'http://prod.api.pvp.net/api/lol/{region}/v1.2/';
 	const API_URL_2_1 = 'http://prod.api.pvp.net/api/lol/{region}/v2.2/';
+	const API_URL_2_3 = 'http://prod.api.pvp.net/api/lol/{region}/v2.3/';
 	const API_KEY = '846b92fa-8063-46c4-9b00-23f4cdae98ac';
 	const RATE_LIMIT_MINUTES = 500;
 	const RATE_LIMIT_SECONDS = 10;
@@ -64,10 +65,10 @@ class riotapi {
 	}
 
 	public function getLeague($id){
-		$call = 'league/by-summoner/' . $id;
+		$call = 'league/by-summoner/' . $id . "/entry"; 
 
 		//add API URL to the call
-		$call = self::API_URL_2_2 . $call;
+		$call = self::API_URL_2_3 . $call;
 
 		return $this->request($call);
 	}

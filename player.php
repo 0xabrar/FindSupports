@@ -51,63 +51,68 @@ class Player {
 	} */
 
 
-	private function get_summoner_tier($summoner_tier) {
-		/* Return a points associated with the specific tier of the player. */
-		$tier = array(
-    		"CHALLENGER" => 500,
-    		"DIAMOND" => 400,
-    		"PLATINUM"  => 300,
-    		"GOLD" => 200,
-    		"SILVER" => 100 ,
-    		"BRONZE" => 0 
-		);
-		return $tier[$summoner_tier];
-	}
-
-	private function get_summoner_division($summoner_division) {
-		/* Return a points associated with the specific division of the player.*/
-		$tier = array(
-			"I" => 100 ,
-			"II" => 80 ,
-			"III" => 60 ,
-			"IV" => 40 ,
-			"V" => 20
-		);
-		return $tier[$summoner_division]; 
-	}
-
-
 	function __construct($summoner_name, $region) {
+		/** Constructor for a single Player instance. Determine whether a Player
+		has recently been updated on the site database. If yes, then construct using
+		db_construct. Otherwise, construct using api_construct. */
+		$this->api_construct($summoner_name, $region);
+	}
+
+	//TODO: want to be able to Map calls to API better
+	private function api_construct($summoner_name, $region) {
 		$this->api = new riotapi($region);
 		$this->name = $summoner_name;
-
-		//TODO: interact with database_player to see if player exists already.
 		$this->set_id();
 		$this->lolking_profile = "http://www.lolking.net/summoner/na/" . $this->id;
-
+		//TODO: interact with database_player to see if player exists already.
+		
+		//Go through API data to determine the most played champion.
 		$this->extract_support_champions();
 		$this->set_most_played_support();
 
-		$this->set_stats();
+		//Set all relevant data for support stats, as well as mmr.
+		$this->set_support_stats();
+		$this->calculate_mmr();
 
 		$this->print_data();
+	}
+
+	//TODO: implement
+	private function db_construct($Summoner_name, $region) {
+		
+	}
+
+	private function calculate_mmr() {
+		/** Take the tier and league information from the getLeague API call
+		and convert it into a points system based  on convert_summoner_tier and 
+		convert_summoner_division. */
+		$mmr = 0;
+		$summoner_api = $this->api->getLeague($this->id);
+		$summoner_league = json_decode($summoner_api, true);
+
+		//League information formatted as Array[0] == Array
+		$summoner_tier = $summoner_league[0]["tier"];
+		$summoner_division = $summoner_league[0]["rank"];
+
+		$mmr += $this->convert_summoner_tier($summoner_tier);
+		$mmr += $this->convert_summoner_division($summoner_division);
+		$this->mmr = $mmr;
 	}
 
 	//TODO: only used for diagnostics, remove after
 	private function print_data() {
 		echo "Name: " . $this->name . "<br>";
 		echo "ID: " . $this->id . "<br>";
+		echo "Most played support: " . $this->most_played_support["name"] . "<br>";
 		echo "Games played: " . $this->games_played . "<br>";
 		echo "Games won: " . $this->games_won . "<br>";
 		echo "Win percent: " . $this->win_percent . "<br>";
 		echo "Average assists: " . $this->avg_assists . "<br>";
-		echo "lolking: " . $this->lolking_profile . "<br>";
-		echo "MMR: " . $this->mmr . "<br>";
+		echo "LoLKing: " . $this->lolking_profile . "<br>";
+		echo "MMR: " . $this->mmr . "<br><br>";
 	}
 
-	private function set_stats() {
-		print_r($this->most_played_support);
-		echo "<br><br>";
+	private function set_support_stats() {
 		$this->games_played = $this->most_played_support["stats"]["totalSessionsPlayed"];
 		$this->games_won = $this->most_played_support["stats"]["totalSessionsWon"];
 		$this->avg_assists = $this->most_played_support["stats"]["totalAssists"] / $this->games_played;
@@ -155,8 +160,7 @@ class Player {
 		$this->most_played_support = $most_played_support;
 	}
 
-	//Includes all of the getter functions for table data associated 
-	//with a specific player.
+	//START: getter functions
 	public function get_name() {
 		return $this->name;
 	}
@@ -188,6 +192,33 @@ class Player {
 	public function get_lolking() {
 		return $this->lolking_profile;
 	}
+	//END: getter functions
+
+	private function convert_summoner_tier($summoner_tier) {
+		/** Return points associated with the specific tier of the player. */
+		$tier = array(
+    		"CHALLENGER" => 500,
+    		"DIAMOND" => 400,
+    		"PLATINUM"  => 300,
+    		"GOLD" => 200,
+    		"SILVER" => 100 ,
+    		"BRONZE" => 0 
+		);
+		return $tier[$summoner_tier];
+	}
+
+	private function convert_summoner_division($summoner_division) {
+		/** Return points associated with the specific division of the player.*/
+		$tier = array(
+			"I" => 100 ,
+			"II" => 80 ,
+			"III" => 60 ,
+			"IV" => 40 ,
+			"V" => 20
+		);
+		return $tier[$summoner_division]; 
+	}
+
 }
 
 ?>
