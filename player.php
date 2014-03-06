@@ -3,7 +3,6 @@
 //Wrapper file for API calls.
 include('php-riot-api.php');
 
-
 class Player {
 	/*
 	Class associated with a single summoner on League of Legengds. The Player
@@ -21,7 +20,6 @@ class Player {
 	private $avg_assists;
 	private $lolking_profile;
 	private $mmr = 0;
-
 
 	//Lists used to determine champions and stats to track when going through stat data.
 	private $stats_to_track = array('TOTAL_SESSIONS_PLAYED', 'TOTAL_SESSIONS_WON', 
@@ -51,33 +49,10 @@ class Player {
 	} */
 
 
-	function __construct($summoner_name, $region) {
-		/** Constructor for a single Player instance. Determine whether a Player
-		has recently been updated on the site database. If yes, then construct using
-		db_construct. Otherwise, construct using api_construct. */
-
-		$con = mysqli_connect("localhost", "root", "candy12", "summoners");
-		// Check connection
-		if (mysqli_connect_errno()) {
-  			echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  		}
-
+	function __construct($summoner_name, $region) { 
+		//TODO: function differently if supposed to get information from db
+		/** Constructor for a single Player instance. */
 		$this->api_construct($summoner_name, $region);
-
-		/* TABLE format is PID, name, games_played, games_won, win_percent, 
-  		avg_assists, most_played_support, lolking, date 
-  		Add information into the table. */
-		mysqli_query($con, "INSERT INTO support (PID, name, games_played, games_won, 
-			win_percent, avg_assists, most_played_support, lolking, mmr, date_added) 
-			VALUES ('$this->id', '$this->name', '$this->games_played', '$this->games_won',
-				'$this->win_percent', '$this->avg_assists', '$this->most_played_support',
-				'$this->lolking_profile', '$this->mmr', NOW())");
-
-		if (!mysqli_query($con,$sql)) {
-  			die('Error: ' . mysqli_error($con));
-  		}
-		echo "1 summoner added." . "<br>";
-		mysqli_close($con); 
 	}
 
 	//TODO: want to be able to Map calls to API better
@@ -97,11 +72,6 @@ class Player {
 		$this->calculate_mmr();
 
 		$this->print_data();
-	}
-
-	//TODO: implement
-	private function db_construct($Summoner_name, $region) {
-		
 	}
 
 	private function calculate_mmr() {
