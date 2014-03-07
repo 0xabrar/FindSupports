@@ -12,6 +12,7 @@ class Player {
 	*/
 	
 	private $api;
+	private $region;
 	private $name;
 	private $id;
 	private $games_played;
@@ -29,7 +30,7 @@ class Player {
 
 	//List of the data of champions that a Player plays.
 	private $support_champions = array();
-	//Stored as an array of all champion data for that most played support. 
+	//Stored as an array of all champion data for that most played support (extract name with ["name"]) 
 	private $most_played_support; 
 
 	/* TODO: would prefer to be able to use a Map like this, refactor
@@ -50,19 +51,20 @@ class Player {
 
 
 	function __construct($summoner_name, $region) { 
-		//TODO: function differently if supposed to get information from db
-		/** Constructor for a single Player instance. */
-		$this->api_construct($summoner_name, $region);
-	}
+		/** Default constructor will create a new Player instance,
+		and set the name, ID, and region of the summoner. */
 
-	//TODO: want to be able to Map calls to API better
-	private function api_construct($summoner_name, $region) {
 		$this->api = new riotapi($region);
 		$this->name = $summoner_name;
 		$this->set_id();
-		$this->lolking_profile = "http://www.lolking.net/summoner/na/" . $this->id;
-		//TODO: interact with database_player to see if player exists already.
+		$this->region = $region;
+	}
+
+
+	//TODO: want to be able to Map calls to API better
+	public function api_construct($summoner_name, $region) {
 		
+		$this->lolking_profile = "http://www.lolking.net/summoner/na/" . $this->id;
 		//Go through API data to determine the most played champion.
 		$this->extract_support_champions();
 		$this->set_most_played_support();
@@ -173,16 +175,20 @@ class Player {
 		return $this->win_percent;
 	}
 
-	public function get_total_assists() {
-		return $this->total_assists;
+	public function get_avg_assists() {
+		return $this->avg_assists;
 	}
 
 	public function get_most_played_support() {
-		return $this->get_most_played_support;
+		return $this->most_played_support["name"];
 	}
 
 	public function get_lolking() {
 		return $this->lolking_profile;
+	}
+
+	public function get_mmr() {
+		return $this->mmr;
 	}
 	//END: getter functions
 
@@ -212,5 +218,4 @@ class Player {
 	}
 
 }
-
 ?>

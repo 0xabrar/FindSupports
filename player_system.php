@@ -12,16 +12,24 @@ class PlayerSystem {
 
 	private $current_summoner;
 	private $other_summoners;
+
 	//An instance of a PlayerDatabaseOperations.
 	private $player_database_operations;
 
 	function __construct($summoner_name, $region) {
 
-		$player = new Player($summoner_name, $region);
 		$player_database_operations = new PlayerDatabaseOperations();
-		echo "itworksherewhynotafter <br>";
-		$player_database_operations->add_player($player);
-		echo "workpleaseIPraytoYaweh";
+
+		$player = new Player($summoner_name, $region);
+		if ($player_database_operations->contains_ID($player->get_id())) {
+			//TODO: make calls to db to retrieve information instead of doing this
+			echo "Summoner already exists.";
+		} else {
+			$player->api_construct();
+			$player_database_operations->add_player($player);
+		}
+
+		$player_database_operations->close_db();
 	}
 }
 
