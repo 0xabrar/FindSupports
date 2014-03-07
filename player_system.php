@@ -15,7 +15,7 @@ class PlayerSystem {
 
 	//An instance of a PlayerDatabaseOperations.
 	private $player_database_operations;
-
+	
 	function __construct($summoner_name, $region) {
 
 		$player_database_operations = new PlayerDatabaseOperations();
