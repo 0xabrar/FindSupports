@@ -20,7 +20,8 @@ class Player {
 	private $win_percent;
 	private $avg_assists;
 	private $lolking_profile;
-	private $mmr = 0;
+	private $mmr;
+	private $most_played_support_name;
 
 	//Lists used to determine champions and stats to track when going through stat data.
 	private $stats_to_track = array('TOTAL_SESSIONS_PLAYED', 'TOTAL_SESSIONS_WON', 
@@ -30,8 +31,10 @@ class Player {
 
 	//List of the data of champions that a Player plays.
 	private $support_champions = array();
-	//Stored as an array of all champion data for that most played support (extract name with ["name"]) 
-	private $most_played_support; 
+	//Stored as an array of all champion data for that most played support (extract name with ["name"])
+	//Not updated when the player information is retrieved from the database.  
+	private $most_played_support;
+	 
 
 	/* TODO: would prefer to be able to use a Map like this, refactor
 	private function get_summoner_info($which_info) {
@@ -91,8 +94,6 @@ class Player {
 		//Set all relevant data for support stats, as well as mmr.
 		$this->set_support_stats();
 		$this->calculate_mmr();
-
-		$this->print_data();
 	}
 
 	private function calculate_mmr() {
@@ -113,10 +114,10 @@ class Player {
 	}
 
 	//TODO: only used for diagnostics, remove after
-	private function print_data() {
+	public function print_data() {
 		echo "Name: " . $this->name . "<br>";
 		echo "ID: " . $this->id . "<br>";
-		echo "Most played support: " . $this->most_played_support["name"] . "<br>";
+		echo "Most played support: " . $this->most_played_support_name . "<br>";
 		echo "Games played: " . $this->games_played . "<br>";
 		echo "Games won: " . $this->games_won . "<br>";
 		echo "Win percent: " . $this->win_percent . "<br>";
@@ -132,7 +133,18 @@ class Player {
 		$this->win_percent= $this->games_won / $this->games_played * 100;
 	}
 
-
+	public function set_all_information($information) {
+		/** Set all of the information for the Player instance. Information is 
+		passed as an associative array. This function is solely called outside 
+		of the class. Setting operations excludes: id, name, and region. */
+		$this->games_played = $information['games_played'];
+		$this->games_won= $information['games_won'];
+		$this->win_percent = $information['win_percent'];
+		$this->avg_assists = $information['avg_assists'];
+		$this->lolking_profile = $information['lolking'];
+		$this->mmr = $information['mmr'];
+		$this->most_played_support_name = $information['most_played_support'];
+	}
 
 	private function set_id() {
 		/*Set the ID of the summoner to the one determined from making an API 
@@ -173,6 +185,7 @@ class Player {
 			}
 		}
 		$this->most_played_support = $most_played_support;
+		$this->most_played_support_name = $most_played_support['name'];
 	}
 
 	//START: getter functions
@@ -201,7 +214,7 @@ class Player {
 	}
 
 	public function get_most_played_support() {
-		return $this->most_played_support["name"];
+		return $this->most_played_support_name;
 	}
 
 	public function get_lolking() {
