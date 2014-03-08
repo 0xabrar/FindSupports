@@ -11,7 +11,7 @@ class PlayerDatabaseOperations {
 	private $con;
 
 	/* TABLE format is PID, name, games_played, games_won, win_percent, 
-  		avg_assists, most_played_support, lolking, date 
+  		avg_assists, most_played_support, lolking, date_added 
   		Add information into the table. */
 
 	function __construct() {
@@ -41,7 +41,7 @@ class PlayerDatabaseOperations {
 		$sql = "INSERT INTO support (PID, name, games_played, games_won, 
 			win_percent, avg_assists, most_played_support, lolking, mmr, date_added) 
 			VALUES ('$id', '$name', '$games_played', '$games_won', '$win_percent','$avg_assists',
-				'$most_played_support', '$lolking', '$mmr', NOW())";
+				'$most_played_support', '$lolking', '$mmr', UNIX_TIMESTAMP())";
 		
 		if (!mysqli_query($this->con, $sql)) {
 			//TODO: make this error not so out there
@@ -59,6 +59,59 @@ class PlayerDatabaseOperations {
 		return false;
 	}
 
+	public function update_player(&$player)  {
+
+		$id = $player->get_id();
+		$games_played = $player->get_games_played();
+		$games_won = $player->get_games_won();
+		$win_percent = $player->get_win_percent();
+		$avg_assists = $player->get_avg_assists();
+		$most_played_support = $player->get_most_played_support();
+		$mmr = $player->get_mmr();
+
+		/** Update a player within the database to contain
+		the new stats. This function is only called if the previous 
+		information for the player hasn't been updated by a specific X time. */
+		$sql = "UPDATE support SET 
+			games_played = $games_played, 
+			games_won = $games_won,
+			win_percent = $win_percent, 
+			avg_assists = $avg_assists,
+			most_played_support = $most_played_support,
+			mmr = $mmr 
+			WHERE PID = $id";
+
+		$query = mysqli_query($this->con, $sql);
+		if (!mysqli_query($this->con, $sql)) {
+			//TODO: make this error not so out there
+			die('Error: ' . mysqli_error($this->con));
+		}
+    }        
+             
+	public function player_needs_update($id) {
+		/** Predicate function which returns true if and only if 
+		a player needs to be updated in the database. */
+		$sql = "SELECT date_added from support where PID = '$id'";
+		$query = mysqli_query($this->con, $sql); 
+
+		//Error occurred with getting the necessary information. 
+		if (!$query) {
+			die('Error: ' . mysqli_error($this->con));
+		}
+
+		//The values for date_added and now are put into variables.
+		$row = $query->fetch_assoc();
+		$date_added = $row['date_added'];
+		$date_now = time();
+
+
+		//If player hasn't been updated in 4 hours, the player needs an update.
+		if ($date_now - $date_added > 14400) {
+			return true;
+		}  return false;		
+	}	
+
+	
 	public function close_db() {
 		/** Closes the database. Sometimes we do not want to close
 		the database after a single operation. */

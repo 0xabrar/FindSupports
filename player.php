@@ -60,6 +60,25 @@ class Player {
 		$this->region = $region;
 	}
 
+	public function  construct_using_id($summoner_id, $region) {
+		/** Set the name of a Player instance using the summoner's
+		summoner ID. Then, construct the rest of the Player instance 
+		using the api_construct function. This is only used for populating the database.*/
+		//TODO: delete function after populating database
+		//TODO: the remaining higher level code must be refactored to allow this function to work 
+
+		$this->api = new riotapi($region);
+		$this->id = $summoner_id;
+		$this->region = $region;
+		
+		$summoner_api = $this->api->getSummoner($this->id);
+		$summoner = json_decode($summoner_api, true);	
+		$this->name = $summoner['name'];
+
+		$this->api_construct($this->name, $region);
+
+	}
+
 
 	//TODO: want to be able to Map calls to API better
 	public function api_construct($summoner_name, $region) {
@@ -112,6 +131,8 @@ class Player {
 		$this->avg_assists = $this->most_played_support["stats"]["totalAssists"] / $this->games_played;
 		$this->win_percent= $this->games_won / $this->games_played * 100;
 	}
+
+
 
 	private function set_id() {
 		/*Set the ID of the summoner to the one determined from making an API 

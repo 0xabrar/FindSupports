@@ -5,7 +5,7 @@ USE summoners;
 
 #Create the initial table under supports database.
 CREATE TABLE support (
-	PID INT NOT NULL,
+	PID INT(32) NOT NULL,
 	name VARCHAR(20),
 	games_played VARCHAR(20),
 	games_won VARCHAR(20),
@@ -14,7 +14,7 @@ CREATE TABLE support (
 	most_played_support VARCHAR(20),
 	lolking VARCHAR(64),
 	mmr VARCHAR(20),
-	date_added DATETIME,
+	date_added INT(32),
 	PRIMARY KEY (PID));
 
 #Show table.
