@@ -7,6 +7,7 @@ USE summoners;
 CREATE TABLE support (
 	PID INT(32) NOT NULL,
 	name VARCHAR(20),
+	region VARCHAR(20), 
 	games_played VARCHAR(20),
 	games_won VARCHAR(20),
 	win_percent VARCHAR(4),

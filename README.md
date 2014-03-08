@@ -11,21 +11,22 @@ develop -> localhost testing
 localbranch -> incremental changes
 
 #####Functionality Needed
-3. Compare users within the player system.
-4. Interact with MySQL database.
+3. Improve and error check on PlayerSystem.
+4. Integrate html and php material.
 5. Improve overall visauls.
 6. Create a script to aid in populating the database.
 
 #####Sprint Details
-Add in MySQL database:
-- construct player instance using db information
-- determine some way decide whether to construct with API or database
+Improve and error check on PlayerSystem:
+- mmr calculation will screw over on large dataset, improve
+- maybe add in some basic unittesting
+- make sure nothing breaks with some weird edge case shit
 
-Compare users within the player system::
-- determine way that player's mmrs can be compared to each other
-- set up functions in player system to keep track of all players
-
+Integrate html and php material:
+- all material provided as an interface from getter functions
+- add in materials from playersystems to results.php page
 #####Changelog
+- v1.7 All backend functionality completed to work correctly. (March 8 2014)_
 - v1.3 Basic functionality with database added. (March 7 2014)  
 - v1.2 Player class added working with API. (March 6 2014)
 - v1.1 Reorganized material, converted to PHP. (March 5 2014)

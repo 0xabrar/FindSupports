@@ -29,6 +29,7 @@ class PlayerDatabaseOperations {
 
 		$id = $player->get_id();
 		$name = $player->get_name();
+		$region = $player->get_region();
 		$games_played = $player->get_games_played();
 		$games_won = $player->get_games_won();
 		$win_percent = $player->get_win_percent();
@@ -38,9 +39,9 @@ class PlayerDatabaseOperations {
 		$mmr = $player->get_mmr();
 
 		//One summoner added if INSERT runs without error.
-		$sql = "INSERT INTO support (PID, name, games_played, games_won, 
+		$sql = "INSERT INTO support (PID, name, region, games_played, games_won, 
 			win_percent, avg_assists, most_played_support, lolking, mmr, date_added) 
-			VALUES ('$id', '$name', '$games_played', '$games_won', '$win_percent','$avg_assists',
+			VALUES ('$id', '$name', '$region', '$games_played', '$games_won', '$win_percent','$avg_assists',
 				'$most_played_support', '$lolking', '$mmr', UNIX_TIMESTAMP())";
 		
 		if (!mysqli_query($this->con, $sql)) {
@@ -104,12 +105,39 @@ class PlayerDatabaseOperations {
     	//Info is the associative array with all relevant user information.
     	$info = $query->fetch_assoc();
     	return $info;
-    }        
+    }       
+
+    public function get_other_players(&$player) {
+    	/** Return an array of arrays of all the other players
+    	who are near the mmr of the player specified.  */
+
+    	$mmr = $player->get_mmr();
+    	$region = $player->get_region();
+
+    	$mmr_max = $mmr + 40;
+    	$mm_min = $mmr - 40;
+
+    	$sql = "SELECT * from support WHERE region = '$region' 
+    		AND mmr BETWEEN '$mmr_min' AND '$mmr_max'";
+    	$query = mysqli_query($this->con, $sql);
+
+    	//Error occured with getting the necessary information.
+    	if (!$query) {
+    		die('Error: ' . mysqli_error($this->con));
+    	}
+
+    	//all_other_players contains array data of all the champions within the given mmr
+    	$all_other_players = array(); 
+    	while ($row = $query->fetch_assoc()) {
+    		array_push($all_other_players, $row);
+    	} return $all_other_players;
+    
+    } 
              
 	public function player_needs_update($id) {
 		/** Predicate function which returns true if and only if 
 		a player needs to be updated in the database. */
-		$sql = "SELECT date_added from support where PID = '$id'";
+		$sql = "SELECT date_added from support WHERE PID = '$id'";
 		$query = mysqli_query($this->con, $sql); 
 
 		//Error occurred with getting the necessary information. 

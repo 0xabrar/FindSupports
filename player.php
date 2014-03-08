@@ -117,6 +117,7 @@ class Player {
 	public function print_data() {
 		echo "Name: " . $this->name . "<br>";
 		echo "ID: " . $this->id . "<br>";
+		echo "Region: " . $this->region .  "<br>";
 		echo "Most played support: " . $this->most_played_support_name . "<br>";
 		echo "Games played: " . $this->games_played . "<br>";
 		echo "Games won: " . $this->games_won . "<br>";
@@ -137,6 +138,9 @@ class Player {
 		/** Set all of the information for the Player instance. Information is 
 		passed as an associative array. This function is solely called outside 
 		of the class. Setting operations excludes: id, name, and region. */
+		$this->id = $information['PID'];
+		$this->name = $information['name'];
+		$this->region = $information['region'];
 		$this->games_played = $information['games_played'];
 		$this->games_won= $information['games_won'];
 		$this->win_percent = $information['win_percent'];
@@ -188,6 +192,32 @@ class Player {
 		$this->most_played_support_name = $most_played_support['name'];
 	}
 
+
+	private function convert_summoner_tier($summoner_tier) {
+		/** Return points associated with the specific tier of the player. */
+		$tier = array(
+    		"CHALLENGER" => 500,
+    		"DIAMOND" => 400,
+    		"PLATINUM"  => 300,
+    		"GOLD" => 200,
+    		"SILVER" => 100 ,
+    		"BRONZE" => 0 
+		);
+		return $tier[$summoner_tier];
+	}
+
+	private function convert_summoner_division($summoner_division) {
+		/** Return points associated with the specific division of the player.*/
+		$tier = array(
+			"I" => 100 ,
+			"II" => 80 ,
+			"III" => 60 ,
+			"IV" => 40 ,
+			"V" => 20
+		);
+		return $tier[$summoner_division]; 
+	}
+
 	//START: getter functions
 	public function get_name() {
 		return $this->name;
@@ -195,6 +225,10 @@ class Player {
 
 	public function get_id() {
 		return $this->id;
+	}
+
+	public function get_region() {
+		return $this->region;
 	}
 
 	public function get_games_played() {
@@ -226,30 +260,7 @@ class Player {
 	}
 	//END: getter functions
 
-	private function convert_summoner_tier($summoner_tier) {
-		/** Return points associated with the specific tier of the player. */
-		$tier = array(
-    		"CHALLENGER" => 500,
-    		"DIAMOND" => 400,
-    		"PLATINUM"  => 300,
-    		"GOLD" => 200,
-    		"SILVER" => 100 ,
-    		"BRONZE" => 0 
-		);
-		return $tier[$summoner_tier];
-	}
-
-	private function convert_summoner_division($summoner_division) {
-		/** Return points associated with the specific division of the player.*/
-		$tier = array(
-			"I" => 100 ,
-			"II" => 80 ,
-			"III" => 60 ,
-			"IV" => 40 ,
-			"V" => 20
-		);
-		return $tier[$summoner_division]; 
-	}
+	
 
 }
 ?>

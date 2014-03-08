@@ -11,7 +11,8 @@ class PlayerSystem {
 	
 
 	private $current_player;
-	private $other_summoners;
+	//Array containing all of the information of other players related to current player.
+	private $other_players;
 
 	//An instance of a PlayerDatabaseOperations.
 	private $player_database_operations;
@@ -27,11 +28,30 @@ class PlayerSystem {
 
 		$this->operate_player($this->current_player);
 
+		//Retrieve listing of all other plays near the current player's mmr. 
+		$this->other_players = $this->player_database_operations->get_other_players($this->current_player);
 		
 		//TODO: remove. only for diagnostic purposes
+		$other_player = $this->get_player(1);
+		$other_player->print_data();
 		$this->current_player->print_data();
 		echo "Done.";
+
 		$player_database_operations->close_db();
+	}
+
+	private function get_player($which_player) {
+		/** Return the a Player instance specified from other summoners. 
+		Pre: $which_player is an integer from 0-9, inclusive. */
+
+		//TODO: this function is incomplete it assumes only 9 other players
+		//TODO: must further polish the mmr calculations, its ok for prototype
+
+		$summoner_name = $other_players[$which_player]['name'];
+		$region = $other_players[$which_player]['region'];
+		$player = new Player($summoner_name, $region);
+		$player->set_all_information($this->other_players[$which_player]);
+		return $player;
 	}
 
 	private function operate_player(&$player) {
