@@ -22,7 +22,10 @@
 	//TODO: make different regions function for api calls
 	$summoner_name = $_GET["summoner"];
 	$player = new PlayerSystem($summoner_name, "na");
+    echo $player->get_player(1)->print_data();
 ?>
+
+
 
 </body>
 </html>

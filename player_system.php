@@ -27,20 +27,14 @@ class PlayerSystem {
 		$this->current_player = new Player($summoner_name, $region);
 
 		$this->operate_player($this->current_player);
-
+		
 		//Retrieve listing of all other plays near the current player's mmr. 
 		$this->other_players = $this->player_database_operations->get_other_players($this->current_player);
-		
-		//TODO: remove. only for diagnostic purposes
-		$other_player = $this->get_player(1);
-		$other_player->print_data();
-		$this->current_player->print_data();
-		echo "Done.";
 
-		$player_database_operations->close_db();
+		$this->player_database_operations->close_db();
 	}
 
-	private function get_player($which_player) {
+	public function get_player($which_player) {
 		/** Return the a Player instance specified from other summoners. 
 		Pre: $which_player is an integer from 0-9, inclusive. */
 
