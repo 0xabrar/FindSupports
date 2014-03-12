@@ -34,22 +34,50 @@ class Player {
 	//Stored as an array of all champion data for that most played support (extract name with ["name"])
 	//Not updated when the player information is retrieved from the database.  
 	private $most_played_support;
+	 
 
-	function __construct($summoner_name, $region) { 
-		/** Default constructor will create a new Player instance,
-		and set the name, ID, and region of the summoner. */
+	/* TODO: would prefer to be able to use a Map like this, refactor
+	private function get_summoner_info($which_info) {
+
+		// Returns relevant summoner information based on 
+		//$which_info as a PHP array.
+		$data = array (
+			"summoner" => $this->api->getSummonerByName($this->name), 
+			"stats" => $this->api->getStats($this->id,'ranked'),
+			"league" => $this->api->getLeague($this->id) ,
+		);
+		
+		$summoner_info_json = $data[$which_info];
+		$summoner_info = json_decode($summoner_info_json, true);
+		return summoner_info;
+	} */
+
+
+	function __construct($summoner_id, $region) { 
+		/** Set the name of a Player instance using the summoner's
+		summoner ID. Then, construct the rest of the Player instance 
+		using the api_construct function. This is only used for populating the database.*/
+		//TODO: delete function after populating database
+		//TODO: the remaining higher level code must be refactored to allow this function to work 
 
 		$this->api = new riotapi($region);
-		$this->name = $summoner_name;
-		$this->set_id();
+		$this->id = $summoner_id;
 		$this->region = $region;
+		$summoner_api = $this->api->getSummoner($this->id);
+		$summoner = json_decode($summoner_api, true);	
+		$this->name = $summoner['name'];
+
+		//Quickly short-circuit construct if invalid ID.
+		if ($this->name == "") {
+			return;
+		}
+
+		$this->api_construct($this->name, $region);
 	}
 
 	//TODO: want to be able to Map calls to API better
 	public function api_construct($summoner_name, $region) {
-		/** Doesn't construct, but rather updates a Player instance 
-		to contain all of the correct information associated with a summoner_name
-		at a specific region. */
+		
 		$this->lolking_profile = "http://www.lolking.net/summoner/na/" . $this->id;
 		//Go through API data to determine the most played champion.
 		$this->extract_support_champions();
@@ -58,6 +86,37 @@ class Player {
 		//Set all relevant data for support stats, as well as mmr.
 		$this->set_support_stats();
 		$this->calculate_mmr();
+	}
+
+	private function calculate_mmr() {
+		/** Take the tier and league information from the getLeague API call
+		and convert it into a points system based  on convert_summoner_tier and 
+		convert_summoner_division. */
+		$mmr = 0;
+		$summoner_api = $this->api->getLeague($this->id);
+		$summoner_league = json_decode($summoner_api, true);
+
+		//League information formatted as Array[0] == Array
+		$summoner_tier = $summoner_league[0]["tier"];
+		$summoner_division = $summoner_league[0]["rank"];
+
+		$mmr += $this->convert_summoner_tier($summoner_tier);
+		$mmr += $this->convert_summoner_division($summoner_division);
+		$this->mmr = $mmr;
+	}
+
+	//TODO: only used for diagnostics, remove after
+	public function print_data() {
+		echo "Name: " . $this->name . "<br>";
+		echo "ID: " . $this->id . "<br>";
+		echo "Region: " . $this->region .  "<br>";
+		echo "Most played support: " . $this->most_played_support_name . "<br>";
+		echo "Games played: " . $this->games_played . "<br>";
+		echo "Games won: " . $this->games_won . "<br>";
+		echo "Win percent: " . $this->win_percent . "<br>";
+		echo "Average assists: " . $this->avg_assists . "<br>";
+		echo "LoLKing: " . $this->lolking_profile . "<br>";
+		echo "MMR: " . $this->mmr . "<br><br>";
 	}
 
 	private function set_support_stats() {
@@ -126,22 +185,6 @@ class Player {
 		$this->most_played_support_name = $most_played_support['name'];
 	}
 
-	private function calculate_mmr() {
-		/** Take the tier and league information from the getLeague API call
-		and convert it into a points system based  on convert_summoner_tier and 
-		convert_summoner_division. */
-		$mmr = 0;
-		$summoner_api = $this->api->getLeague($this->id);
-		$summoner_league = json_decode($summoner_api, true);
-
-		//League information formatted as Array[0] == Array
-		$summoner_tier = $summoner_league[0]["tier"];
-		$summoner_division = $summoner_league[0]["rank"];
-
-		$mmr += $this->convert_summoner_tier($summoner_tier);
-		$mmr += $this->convert_summoner_division($summoner_division);
-		$this->mmr = $mmr;
-	}
 
 	private function convert_summoner_tier($summoner_tier) {
 		/** Return points associated with the specific tier of the player. */

@@ -9,6 +9,7 @@ class PlayerSystem {
 	MMR. The class is responsible for reading and writing to the database, as well
 	as maintaining the overall player relations system. */
 	
+
 	private $current_player;
 	//Array containing all of the information of other players related to current player.
 	private $other_players;
@@ -16,19 +17,19 @@ class PlayerSystem {
 	//An instance of a PlayerDatabaseOperations.
 	private $player_database_operations;
 	
-	function __construct($summoner_name, $region) {
+	function __construct($summoner_id, $region) {
 		/** Constructor for a PlayerSystem. This takes the original summoner for which
 		the PlayerSystem is instantiated and uses it as the central point. Other summoners
 		with similar mmrs to the main player will be found in the database and have instances
 		of them created to display on results tables. */
-
 		$this->player_database_operations = new PlayerDatabaseOperations();
-		$this->current_player = new Player($summoner_name, $region);
+		$this->current_player = new Player($summoner_id, $region);
 
-		$this->operate_player($this->current_player);
-		
-		//Retrieve listing of all other plays near the current player's mmr. 
-		$this->other_players = $this->player_database_operations->get_other_players($this->current_player);
+		//Only player to database if valid ID.
+		if ($this->current_player->get_name() != "") {
+			$this->player_database_operations->add_player($this->current_player);
+		} 
+
 		$this->player_database_operations->close_db();
 	}
 

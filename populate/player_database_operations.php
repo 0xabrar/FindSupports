@@ -50,6 +50,16 @@ class PlayerDatabaseOperations {
 		}
 	}
 
+	public function contains_ID($id) {
+		/** Return true if an only if the database contains the PlayerID 
+		passed as a parameter. */
+		$query = mysqli_query($this->con, "SELECT PID from support WHERE PID = '$id'");
+		if ($query->num_rows > 0) {
+			return true;
+		} 
+		return false;
+	}
+
 	public function update_player(&$player)  {
 		/** Update a player within the database to contain
 		the new stats. This function is only called if the previous 
@@ -146,16 +156,6 @@ class PlayerDatabaseOperations {
 		}  return false;		
 	}	
 
-
-	public function contains_ID($id) {
-		/** Return true if an only if the database contains the PlayerID 
-		passed as a parameter. */
-		$query = mysqli_query($this->con, "SELECT PID from support WHERE PID = '$id'");
-		if ($query->num_rows > 0) {
-			return true;
-		} 
-		return false;
-	}
 	
 	public function close_db() {
 		/** Closes the database. Sometimes we do not want to close

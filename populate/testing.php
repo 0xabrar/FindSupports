@@ -4,8 +4,6 @@
     <title>Find Me A Support League of Legends</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <!-- Bootstrap -->  
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,11 +16,16 @@
 
 <?php
 
-	include('player_system.php');	
-	//TODO: make different regions function for api calls
-	$summoner_name = $_GET["summoner"];
-	$player = new PlayerSystem($summoner_name, "na");
-    echo $player->get_player(1)->print_data();
+	include('player_system.php');
+    //Add in summoners to db
+    
+	for ($i = 21597200; $i < 22597200; $i++) {
+        $player = new PlayerSystem($i, "na");
+        sleep(5);
+        echo "Summoner added: " . $i . "<br>";
+    }  
+
+	
 ?>
 
 
