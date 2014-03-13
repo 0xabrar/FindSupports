@@ -21,6 +21,10 @@ summary {
   display: block;
 }
 
+*{
+  font-family: 'Montserrat', sans-serif;
+}
+
 audio,
 canvas,
 video {
