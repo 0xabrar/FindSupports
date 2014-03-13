@@ -102,15 +102,17 @@ class PlayerDatabaseOperations {
     	who are near the mmr of the player specified.  */
 
     	$mmr = $player->get_mmr();
+    	$name = $player->get_name();
     	$region = $player->get_region();
 
-    	$mmr_max = $mmr + 20;
-    	$mm_min = $mmr - 20;
+    	$mmr_max = $mmr + 40;
+    	$mmr_min = $mmr - 40;
+
 
     	$sql = "SELECT * from support WHERE region = '$region' 
-    		AND mmr BETWEEN '$mmr_min' AND '$mmr_max'";
+    		AND mmr BETWEEN '$mmr_min' AND '$mmr_max' AND NOT name = '$name'";
     	$query = mysqli_query($this->con, $sql);
-
+    	
     	//Error occured with getting the necessary information.
     	if (!$query) {
     		die('Error: ' . mysqli_error($this->con));

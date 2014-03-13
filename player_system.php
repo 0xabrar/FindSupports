@@ -10,8 +10,10 @@ class PlayerSystem {
 	as maintaining the overall player relations system. */
 	
 	private $current_player;
+	private $other_players = array();
 	//Array containing all of the information of other players related to current player.
-	private $other_players;
+	private $other_players_data;
+
 
 	//An instance of a PlayerDatabaseOperations.
 	private $player_database_operations;
@@ -28,22 +30,49 @@ class PlayerSystem {
 		$this->operate_player($this->current_player);
 		
 		//Retrieve listing of all other plays near the current player's mmr. 
-		$this->other_players = $this->player_database_operations->get_other_players($this->current_player);
+		$this->other_players_data = $this->player_database_operations->get_other_players($this->current_player);
+		$this->sort_other_players();
+
 		$this->player_database_operations->close_db();
 	}
 
 	public function get_player($which_player) {
 		/** Return the a new Player instance specified from other summoners. 
 		Pre: $which_player is an integer from 0-9, inclusive. */
+		return $this->other_players[$which_player];
+	}
 
-		//TODO: this function is incomplete it assumes only 9 other players
-		//TODO: must further polish the mmr calculations, its ok for prototype
+	private function sort_other_players() {
+		/** Goes through the other players and sorts them 
+		according to win rate. Make the top 10 support summoners
+		the other_players in the PlayerSystem. */
 
-		$summoner_name = $other_players[$which_player]['name'];
-		$region = $other_players[$which_player]['region'];
-		$player = new Player($summoner_name, $region);
-		$player->set_all_information($this->other_players[$which_player]);
-		return $player;
+		$all_players = array();
+
+		//Create an array of Players from all other summoner data.
+		for ($i = 0; $i < sizeof($this->other_players_data); $i++) {
+			$summoner_name = $other_players_data[$i]['name'];
+			$region = $other_players_data[$i]['region'];
+			$player = new Player($summoner_name, $region);
+			$player->set_all_information($this->other_players_data[$i]);
+			array_push($all_players, $player);
+		}
+
+		$player_win_rates = array();
+		//Put all win rates into an array.
+		for ($i = 0; $i < sizeof($all_players); $i++) {
+			array_push($player_win_rates, $all_players[$i]->get_win_percent());
+		}
+
+
+		//Assign top best players. 
+		for ($i = 0; $i < 10; $i++) {
+			if ($i < sizeof($all_players)) {
+				$best_player = array_keys($player_win_rates, max($player_win_rates));
+				$player_win_rates[$best_player[0]] = 0;	
+				$this->other_players[$i] = $all_players[$best_player[0]];
+			}
+		}
 	}
 
 	private function operate_player(&$player) {

@@ -25,12 +25,29 @@ class PlayerSystem {
 		$this->player_database_operations = new PlayerDatabaseOperations();
 		$this->current_player = new Player($summoner_id, $region);
 
-		//Only player to database if valid ID.
-		if ($this->current_player->get_name() != "") {
+		//Only add player to database if pplayer information is valid.
+		if ($this->player_valid($this->current_player)) {
 			$this->player_database_operations->add_player($this->current_player);
 		} 
 
 		$this->player_database_operations->close_db();
+	}
+
+	private function player_valid($player) {
+		/** A predicate function which returns 
+		true if and only if all the information for a player is valid. */
+		if ($this->current_player->get_name() == "") return false;
+		if ($this->current_player->get_id() == "") return false;
+		if ($this->current_player->get_region() == "") return false;
+		if ($this->current_player->get_games_played() == "") return false;
+		if ($this->current_player->get_games_won() == "") return false;
+		if ($this->current_player->get_win_percent() == "") return false;
+		if ($this->current_player->get_avg_assists() == "") return false;
+		if ($this->current_player->get_most_played_support() == "") return false;
+		if ($this->current_player->get_lolking() == "") return false;
+		if ($this->current_player->get_mmr() == "") return false;
+		return true;
+
 	}
 
 	public function get_player($which_player) {

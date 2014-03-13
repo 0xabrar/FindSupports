@@ -66,9 +66,9 @@ class Player {
 		$summoner_api = $this->api->getSummoner($this->id);
 		$summoner = json_decode($summoner_api, true);	
 		$this->name = $summoner['name'];
-
-		//Quickly short-circuit construct if invalid ID.
-		if ($this->name == "") {
+		$level = $summoner['summonerLevel'];
+		//Quickly short-circuit construct if invalid ID or non-level 30 account.
+		if ($this->name == "" or $level != "30") {
 			return;
 		}
 

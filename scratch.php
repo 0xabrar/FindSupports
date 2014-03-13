@@ -1,8 +1,5 @@
 <?php
   include('player_system.php'); 
-  //TODO: make different regions function for api calls
-  $summoner_name = $_GET["summoner"];
-  $playerSystem = new PlayerSystem($summoner_name, "na");
   echo "
   <!DOCTYPE html>
   <html>
@@ -50,14 +47,17 @@
                       <th>Win %</th>  
                       <th>Average Assists</th>  
                       <th>Most Played Champion</th>
-                      <th>LolKing Profile</th>
+                      <th>LoLKing Profile</th>
                       </tr>  
                   </thead>
 
 
             <tbody>";
-
-              for ($i = 1; $i < 10; $i++) {
+              //TODO: make different regions function for api calls
+              $summoner_name = $_GET["summoner"];
+              $playerSystem = new PlayerSystem($summoner_name, "na");
+              
+              for ($i = 0; $i < 10; $i++) {
                 $player = $playerSystem->get_player($i);
                 $playerName = $player->get_name();
                 $playerPlayed = $player->get_games_played();
