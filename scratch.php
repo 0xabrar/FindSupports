@@ -24,7 +24,13 @@
       <![endif]-->
     </head>
   <body>
-      <style> body {background-image:url(\"./images/background.png\"); background-repeat: no-repeat; background-size: cover } </style>
+      <style> body { background: url(./images/results_background.png) no-repeat center center fixed; 
+                      -webkit-background-size: cover;
+                      -moz-background-size: cover;
+                      -o-background-size: cover;
+                      background-size: cover;
+                    } 
+      </style>
 
       <div class =\"container\" style=\"margin-top:10%\">
         <div class=\"center-block\">
@@ -66,7 +72,7 @@
                 $playerChampion = $player->get_most_played_support();
                 $playerProfile = $player->get_lolking();
 
-                echo"<tr>";
+                echo"<tr  height=\"70\"> ";
                 echo "<td style=\"vertical-align: middle\"><center><a href=\"" .$playerProfile. "\">" .$playerName. "</a></center></td>";
                 echo "<td style=\"vertical-align: middle\"><center>" .$playerPlayed. "</center></td>";
                 echo "<td style=\"vertical-align: middle\"><center>" .$playerWon. "</center></td>";
