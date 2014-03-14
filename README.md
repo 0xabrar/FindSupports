@@ -11,9 +11,10 @@ develop -> localhost testing
 localbranch -> incremental changes
 
 #####Functionality Needed
-3. Improve and error check on PlayerSystem.
-5. Improve overall visauls.
-6. Create a script to aid in populating the database.
+1. Improve overall visuals.
+2. Improve and error check on PlayerSystem
+3. Add in details about Twitter, Google Analytics, etc.
+4. Show error messages back to users.
 
 #####Sprint Details
 Improve and error check on PlayerSystem:
@@ -22,6 +23,7 @@ Improve and error check on PlayerSystem:
 - etc.
 
 #####Changelog
+- v2.2 Updated UI and have properly functional calculations. (March 14 2014)
 - v2.0 Prototype functionality out. (March 12 2014)
 - v1.7 All backend functionality completed to work correctly. (March 8 2014)
 - v1.3 Basic functionality with database added. (March 7 2014)  

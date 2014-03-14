@@ -23,7 +23,6 @@ class PlayerSystem {
 		the PlayerSystem is instantiated and uses it as the central point. Other summoners
 		with similar mmrs to the main player will be found in the database and have instances
 		of them created to display on results tables. */
-
 		$this->player_database_operations = new PlayerDatabaseOperations();
 		$this->current_player = new Player($summoner_name, $region);
 
@@ -32,7 +31,8 @@ class PlayerSystem {
 		//Retrieve listing of all other plays near the current player's mmr. 
 		$this->other_players_data = $this->player_database_operations->get_other_players($this->current_player);
 		$this->sort_other_players();
-
+		
+		//TODO: print error when user is not playing ranked
 		$this->player_database_operations->close_db();
 	}
 
@@ -44,26 +44,31 @@ class PlayerSystem {
 
 	private function sort_other_players() {
 		/** Goes through the other players and sorts them 
-		according to win rate. Make the top 10 support summoners
+		according to win rate and games won. Make the top 10 support summoners
 		the other_players in the PlayerSystem. */
-
 		$all_players = array();
 
 		//Create an array of Players from all other summoner data.
 		for ($i = 0; $i < sizeof($this->other_players_data); $i++) {
 			$summoner_name = $other_players_data[$i]['name'];
 			$region = $other_players_data[$i]['region'];
-			$player = new Player($summoner_name, $region);
+			$player = new Player($summoner_name, $region, false);
 			$player->set_all_information($this->other_players_data[$i]);
 			array_push($all_players, $player);
 		}
+		usort($all_players, function($a, $b) {
+    		return $this->calculate_support_score($b) - $this->calculate_support_score($a);
+		});
+		for ($i = 0; $i < min(10,sizeof($all_players)); $i++)
+			$this->other_players[$i] = $all_players[$i];
 
+		/*
 		$player_win_rates = array();
 		//Put all win rates into an array.
 		for ($i = 0; $i < sizeof($all_players); $i++) {
-			array_push($player_win_rates, $all_players[$i]->get_win_percent());
+			$win_percent = $this->calculate_support_score($all_players[$i]);
+			array_push($player_win_rates, $win_percent);
 		}
-
 
 		//Assign top best players. 
 		for ($i = 0; $i < 10; $i++) {
@@ -72,7 +77,17 @@ class PlayerSystem {
 				$player_win_rates[$best_player[0]] = 0;	
 				$this->other_players[$i] = $all_players[$best_player[0]];
 			}
-		}
+		}*/
+	}
+
+	private function calculate_support_score(&$player) {
+		/** Take a player and calculate their score based on 
+		win rate as well as games won. f(x): winpercent*gamesplayed 
+		Post: return a number based on f(x) */
+
+		$win_percent = $player->get_win_percent();
+		$games_played = $player->get_games_won();
+		return $win_percent * $games_played;
 	}
 
 	private function operate_player(&$player) {
@@ -93,14 +108,20 @@ class PlayerSystem {
 			//Player needs to be updated, only need PID to check.
 			if ($this->player_database_operations->player_needs_update($player->get_id())) {
 				$player->api_construct();
-				$this->player_database_operations->update_player($player);
+				if ($this->player_valid($player)) {
+					$this->player_database_operations->update_player($player);
+				}
+				
 			} else {
 				$this->update_player_instance($player);
 			} 
-		
+		//TODO: throw error messages to user when player is not valid
 		} else {
 			$player->api_construct();
-			$this->player_database_operations->add_player($player);
+			if ($this->player_valid($player)) {
+				$this->player_database_operations->add_player($player);
+			}
+			
 		}
     }
 	
@@ -113,6 +134,23 @@ class PlayerSystem {
 		$info = $this->player_database_operations->get_player_information($player->get_id());
 		$player->set_all_information($info);
 	}
+
+	private function player_valid($player) {
+		/** A predicate function which returns 
+		true if and only if all the information for a Player instance is valid. */
+		if ($this->current_player->get_name() == "") return false;
+		if ($this->current_player->get_id() == "") return false;
+		if ($this->current_player->get_region() == "") return false;
+		if ($this->current_player->get_games_played() == "") return false;
+		if ($this->current_player->get_games_won() == "") return false;
+		if ($this->current_player->get_win_percent() == "") return false;
+		if ($this->current_player->get_avg_assists() == "") return false;
+		if ($this->current_player->get_most_played_support() == "") return false;
+		if ($this->current_player->get_lolking() == "") return false;
+		if ($this->current_player->get_mmr() == "") return false;
+		return true;
+	}
+
 
 	
 }

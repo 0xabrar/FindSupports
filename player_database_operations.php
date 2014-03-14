@@ -105,12 +105,14 @@ class PlayerDatabaseOperations {
     	$name = $player->get_name();
     	$region = $player->get_region();
 
-    	$mmr_max = $mmr + 40;
-    	$mmr_min = $mmr - 40;
+    	$mmr_max = $mmr + 20;
+    	$mmr_min = $mmr - 20;
 
-
-    	$sql = "SELECT * from support WHERE region = '$region' 
-    		AND mmr BETWEEN '$mmr_min' AND '$mmr_max' AND NOT name = '$name'";
+    	$sql = "SELECT * from support WHERE 
+    			region = '$region' 
+    			AND mmr BETWEEN '$mmr_min' AND '$mmr_max' 
+    			AND win_percent >= 70 AND win_percent <= 100
+    			AND NOT name = '$name'";
     	$query = mysqli_query($this->con, $sql);
     	
     	//Error occured with getting the necessary information.
@@ -122,7 +124,7 @@ class PlayerDatabaseOperations {
     	$all_other_players = array(); 
     	while ($row = $query->fetch_assoc()) {
     		array_push($all_other_players, $row);
-    	} return $all_other_players;
+    	} return $all_other_players;	
     
     } 
              

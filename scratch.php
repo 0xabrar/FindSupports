@@ -1,4 +1,7 @@
 <?php
+    //$mst = microtime(true);
+    //global $mst;
+    //echo __FILE__,__LINE__,":",(microtime(true)-$mst),"<br>";
   include('player_system.php'); 
   //TODO: make different regions function for api calls
   $summoner_name = $_GET["summoner"];

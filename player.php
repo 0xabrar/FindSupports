@@ -35,13 +35,15 @@ class Player {
 	//Not updated when the player information is retrieved from the database.  
 	private $most_played_support;
 
-	function __construct($summoner_name, $region) { 
+	function __construct($summoner_name, $region, $call_api = true) { 
 		/** Default constructor will create a new Player instance,
 		and set the name, ID, and region of the summoner. */
 
 		$this->api = new riotapi($region);
 		$this->name = $summoner_name;
-		$this->set_id();
+		if ($call_api) {
+			$this->set_id();
+		}
 		$this->region = $region;
 	}
 
