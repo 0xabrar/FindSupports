@@ -19,12 +19,11 @@
 	include('player_system.php');
     //Add in summoners to db
     
-	for ($i = 34558500; $i < 35598500; $i++) {
+	for ($i = 100231; $i < 36598500; $i++) {
         $player = new PlayerSystem($i, "na");
-        sleep(5);
-    }  
-
-	
+        sleep(10);
+        echo "Summoner: " . $i . "<br>";
+    } 
 ?>
 
 

@@ -78,7 +78,7 @@ class Player {
 	//TODO: want to be able to Map calls to API better
 	public function api_construct($summoner_name, $region) {
 		
-		$this->lolking_profile = "http://www.lolking.net/summoner/na/" . $this->id;
+		$this->lolking_profile = "http://www.lolking.net/summoner/" . $this->region . "/" . $this->id;
 		//Go through API data to determine the most played champion.
 		$this->extract_support_champions();
 		$this->set_most_played_support();

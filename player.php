@@ -52,7 +52,7 @@ class Player {
 		/** Doesn't construct, but rather updates a Player instance 
 		to contain all of the correct information associated with a summoner_name
 		at a specific region. */
-		$this->lolking_profile = "http://www.lolking.net/summoner/na/" . $this->id;
+		$this->lolking_profile = "http://www.lolking.net/summoner/" . $this->region . "/" . $this->id;
 		//Go through API data to determine the most played champion.
 		$this->extract_support_champions();
 		$this->set_most_played_support();

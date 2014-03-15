@@ -30,6 +30,7 @@ class PlayerSystem {
 			$this->player_database_operations->add_player($this->current_player);
 		} 
 
+		$this->current_player->print_data();
 		$this->player_database_operations->close_db();
 	}
 
