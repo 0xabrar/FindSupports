@@ -76,14 +76,20 @@
                 $playerChampion = $player->get_most_played_support();
                 $playerProfile = $player->get_lolking();
 
-                echo"<tr  height=\"50\"> ";
-                echo "<td style=\"vertical-align: middle\"><center><a href=\"" .$playerProfile. "\">" .$playerName. "</a></center></td>";
-                echo "<td style=\"vertical-align: middle\"><center>" .$playerPlayed. "</center></td>";
-                echo "<td style=\"vertical-align: middle\"><center>" .$playerWon. "</center></td>";
-                echo "<td style=\"vertical-align: middle\"><center>" .$playerPercent. "</center></td>";
-                echo "<td style=\"vertical-align: middle\"><center>" .$playerAssists. "</center></td>";
-                echo "<td style=\"vertical-align: middle\"><center>"."<img src=\"images/champion_icons/janna.png\" height=\"30\" width=\"30\"> <br>" .$playerChampion. "</center></td>";
-                echo "</tr>";
+                //Object will be null if less than 10 players exist. 
+                if ($playerName != null) {
+                  echo"<tr  height=\"50\"> ";
+                  echo "<td style=\"vertical-align: middle\"><center><a href=\"" .$playerProfile. "\">" .$playerName. "</a></center></td>";
+                  echo "<td style=\"vertical-align: middle\"><center>" .$playerPlayed. "</center></td>";
+                  echo "<td style=\"vertical-align: middle\"><center>" .$playerWon. "</center></td>";
+                  echo "<td style=\"vertical-align: middle\"><center>" .$playerPercent. "</center></td>";
+                  echo "<td style=\"vertical-align: middle\"><center>" .$playerAssists. "</center></td>";
+                  echo "<td style=\"vertical-align: middle\"><center>"."<img src=\"images/champion_icons/janna.png\" height=\"30\" width=\"30\"> <br>" .$playerChampion. "</center></td>";
+                  echo "</tr>";
+                } else {
+                  echo "wtf";
+                }
+                
               }   
             echo" 
             </tbody>  

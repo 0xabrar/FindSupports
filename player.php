@@ -11,9 +11,9 @@ class Player {
 	and the calling PHP page to set and return Player information.  
 	*/
 	
-	private $api;
-	private $region;
-	private $name;
+	private $api = null;
+	private $region = null;
+	private $name = null;
 	private $id;
 	private $games_played;
 	private $games_won;
