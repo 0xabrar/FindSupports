@@ -39,6 +39,7 @@
         <div class=\"center-block\">
           <!-- The div that holds the title -->
           <div class=\"center-block\">
+            <br><br>
             <a href =\"index.php\"> <img src=\"images/logo.png\" class=\"center-block\"> 
             </img> </a>
           </div>
@@ -51,7 +52,7 @@
           <!-- The div that holds the title -->
           <div class=\"center-block\">
 
-                <table class=\"table table-striped table-bordered table-condensed table-hover\" style=\"border-color:black; width:70%; margin-left:auto ; margin-right: auto;\">  
+                <table class=\"table table-striped table-bordered table-condensed table-hover\" style=\"border-color:black; width:75%; margin-left:auto ; margin-right: auto;\">  
                   <thead>  
                     <tr>  
                       <th><center>Summoner Name</center></th>  
