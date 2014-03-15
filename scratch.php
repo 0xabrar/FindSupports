@@ -51,7 +51,7 @@
           <!-- The div that holds the title -->
           <div class=\"center-block\">
 
-                <table class=\"table table-striped table-bordered table-condensed table-hover\" style=\"border-color:black\">  
+                <table class=\"table table-striped table-bordered table-condensed table-hover\" style=\"border-color:black; width:70%; margin-left:auto ; margin-right: auto;\">  
                   <thead>  
                     <tr>  
                       <th><center>Summoner Name</center></th>  
@@ -66,22 +66,22 @@
             <tbody>";
 
               for ($i = 1; $i < 10; $i++) {
-                $player = $playerSystem->get_player($i);
-                $playerName = $player->get_name();
-                $playerPlayed = $player->get_games_played();
-                $playerWon = $player->get_games_won();
-                $playerPercent = $player->get_win_percent();
-                $playerAssists = $player->get_avg_assists();
-                $playerChampion = $player->get_most_played_support();
-                $playerProfile = $player->get_lolking();
+                // $player = $playerSystem->get_player($i);
+                // $playerName = $player->get_name();
+                // $playerPlayed = $player->get_games_played();
+                // $playerWon = $player->get_games_won();
+                // $playerPercent = $player->get_win_percent();
+                // $playerAssists = $player->get_avg_assists();
+                // $playerChampion = $player->get_most_played_support();
+                // $playerProfile = $player->get_lolking();
 
-                echo"<tr  height=\"50\"> ";
-                echo "<td style=\"vertical-align: middle\"><center><a href=\"" .$playerProfile. "\">" .$playerName. "</a></center></td>";
-                echo "<td style=\"vertical-align: middle\"><center>" .$playerPlayed. "</center></td>";
-                echo "<td style=\"vertical-align: middle\"><center>" .$playerWon. "</center></td>";
-                echo "<td style=\"vertical-align: middle\"><center>" .$playerPercent. "</center></td>";
-                echo "<td style=\"vertical-align: middle\"><center>" .$playerAssists. "</center></td>";
-                echo "<td style=\"vertical-align: middle\"><center>"."<img src=\"images/champion_icons/janna.png\" height=\"30\" width=\"30\"> <br>" .$playerChampion. "</center></td>";
+                echo"<tr  height=\"50\">";
+                echo "<td style=\"vertical-align: middle\"><center><a href=\"" ."google.com". "\">" . "hello" ."</a></center></td>";
+                echo "<td style=\"vertical-align: middle\"><center>" ."hello". "</center></td>";
+                echo "<td style=\"vertical-align: middle\"><center>" ."hello". "</center></td>";
+                echo "<td style=\"vertical-align: middle\"><center>" ."hello". "</center></td>";
+                echo "<td style=\"vertical-align: middle\"><center>" ."hello". "</center></td>";
+                echo "<td style=\"vertical-align: middle\"><center>"."<img src=\"images/champion_icons/janna.png\" height=\"30\" width=\"30\">  " ."hello". "</center></td>";
                 echo "</tr>";
               }  
             echo" 
