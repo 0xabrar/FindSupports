@@ -81,7 +81,7 @@
                 echo "<td style=\"vertical-align: middle\"><center>" ."hello". "</center></td>";
                 echo "<td style=\"vertical-align: middle\"><center>" ."hello". "</center></td>";
                 echo "<td style=\"vertical-align: middle\"><center>" ."hello". "</center></td>";
-                echo "<td style=\"vertical-align: middle\"><center>"."<img src=\"images/champion_icons/janna.png\" height=\"30\" width=\"30\">  " ."hello". "</center></td>";
+                echo "<td style=\"vertical-align: middle\"><center>"."<img src=\"images/champion_icons/janna.png\" height=\"40\" width=\"40\">  " ."hello". "</center></td>";
                 echo "</tr>";
               }  
             echo" 
@@ -91,8 +91,8 @@
         </div>
       </div>
 
-      <p style=\"position:fixed; bottom:0; font-size:0.8em; width:100%\"><center><small style=\"color:#FFFFFF\">FindMeASupport isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.
-        <small></center></p>
+      <p style=\"position:fixed; bottom:0; width:100%\"><center><small style=\"color:#B5B5B5; font-size:0.7em;\">FindMeASupport isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.
+        </small></center></p>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src=\"https://code.jquery.com/jquery.js\"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
