@@ -16,7 +16,13 @@
     <![endif]-->
   </head>
   <body>
-    <style> body {background-image:url("./images/background.png"); background-repeat: no-repeat; background-size: cover } </style>
+    <style> body { background: url(./images/background.png) no-repeat center center fixed; 
+                      -webkit-background-size: cover;
+                      -moz-background-size: cover;
+                      -o-background-size: cover;
+                      background-size: cover;
+                    }  
+            </style>
 
     <div class ="container" style="margin-top:12%">
       <div class="center-block">
