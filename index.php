@@ -31,16 +31,25 @@
         <div class="container">
           <div class="col-md-8 col-md-offset-2">
             <div class="col-lg-12">
-              <form class="input-group form-inline" role="form" method="get" action="/results.php">
-                <input type="text" class="form-control" placeholder="Enter your summoner name" name="summoner"> 
-                <span class="input-group-btn">
-                 <button class="btn btn-info" type="submit">Search</button>
-               </span>
-             </form><!-- /input-group -->
+               <form class="input-group" role="form" method="get" action="results.php">
+                  <input type="text" class="form-control form-inline" id="summonerSearchBar" placeholder="Enter your summoner name" name="summoner">
+                      <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" id="regionDropdown" data-toggle="dropdown">NA <span class="caret"></span></button>
+                                <ul class="dropdown-menu pull-left">
+                                    <li name="na"><a href="#">EUNE</a></li>
+                                    <li name="eune"><a href="#">EUW</a></li>
+                                    <li name="euw"><a href="#">NA</a></li>
+                                  </ul>
+                               &nbsp;
+                               &nbsp;       
+                            <button class="btn btn-info" id="searchButton" type="submit">Search</button>
+                      </div><!-- /btn-group -->
+                      
+                    </form>
+               </div><!-- /input-group -->
            </div><!-- /.col-lg-6 -->
          </div>
        </div>
-
        <!-- TODO: wtf raunaq there's some clear as hell inconsistency if I have to do this bullshit -->
        <br><br><br><br><br><br><br><br><br><br><br><br>
        <?php

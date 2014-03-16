@@ -25,6 +25,23 @@ summary {
   font-family: 'Montserrat', sans-serif;
 }
 
+#searchButton{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+#regionDropdown{
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+#summonerSearchBar{
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
 audio,
 canvas,
 video {
