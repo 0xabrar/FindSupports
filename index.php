@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
   <!-- Bootstrap -->  
-  <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
   <link href='http://fonts.googleapis.com/css?family=Cinzel|Montserrat' rel='stylesheet' type='text/css'>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -16,13 +16,13 @@
         <![endif]-->
       </head>
       <body>
-        <style> body {background-image:url("./images/background.png"); background-repeat: no-repeat; background-size: cover } </style>
+        <style> body {background-image:url("/images/background.png"); background-repeat: no-repeat; background-size: cover } </style>
 
         <div class ="container" style="margin-top:12%">
           <div class="center-block">
             <!-- The div that holds the title -->
             <div class="center-block">
-              <a href ="index.php"> <img src="images/logo.png" class="center-block"> 
+              <a href ="/index.php"> <img src="images/logo.png" class="center-block"> 
               </img> </a>
             </div>
           </div>
@@ -31,7 +31,7 @@
         <div class="container">
           <div class="col-md-8 col-md-offset-2">
             <div class="col-lg-12">
-              <form class="input-group form-inline" role="form" method="get" action="results.php">
+              <form class="input-group form-inline" role="form" method="get" action="/results.php">
                 <input type="text" class="form-control" placeholder="Enter your summoner name" name="summoner"> 
                 <span class="input-group-btn">
                  <button class="btn btn-info" type="submit">Search</button>

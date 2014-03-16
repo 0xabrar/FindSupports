@@ -11,9 +11,9 @@ class Player {
 	and the calling PHP page to set and return Player information.  
 	*/
 	
-	private $api = null;
-	private $region = null;
-	private $name = null;
+	private $api;
+	private $region;
+	private $name;
 	private $id;
 	private $games_played;
 	private $games_won;
@@ -27,7 +27,7 @@ class Player {
 	private $stats_to_track = array('TOTAL_SESSIONS_PLAYED', 'TOTAL_SESSIONS_WON', 
 		'TOTAL_ASSISTS', 'TOTAL_CHAMPION_KILLS', 'TOTAL_DEATHS_PER_SESSION');
 	private $names_to_track = array('Sona', 'Soraka', 'Janna', 'Taric', 'Elise', 'Annie', 
-		'Fiddlesticks', 'Leona', 'Thresh', 'Zyra', 'Blitzcrank', 'Nami', 'Alistar');
+		'Fiddlesticks', 'Leona', 'Thresh', 'Zyra', 'Blitzcrank', 'Nami', 'Alistar', 'Lulu');
 
 	//List of the data of champions that a Player plays.
 	private $support_champions = array();

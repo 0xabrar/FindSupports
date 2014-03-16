@@ -19,6 +19,7 @@ class PlayerSystem {
 	private $player_database_operations;
 	
 	function __construct($summoner_name, $region) {
+
 		/** Constructor for a PlayerSystem. This takes the original summoner for which
 		the PlayerSystem is instantiated and uses it as the central point. Other summoners
 		with similar mmrs to the main player will be found in the database and have instances
@@ -50,34 +51,22 @@ class PlayerSystem {
 
 		//Create an array of Players from all other summoner data.
 		for ($i = 0; $i < sizeof($this->other_players_data); $i++) {
-			$summoner_name = $other_players_data[$i]['name'];
-			$region = $other_players_data[$i]['region'];
-			$player = new Player($summoner_name, $region, false);
+			$summoner_name = $other_players_data[0][$i]['name'];
+			$region = $other_players_data[0][$i]['region'];
+			$player = new Player($summoner_name, $region);
+			//Operate on each individual player.
+			//$this->operate_player($player);
 			$player->set_all_information($this->other_players_data[$i]);
 			array_push($all_players, $player);
 		}
+
+		//Sort the player into best supports.
 		usort($all_players, function($a, $b) {
     		return $this->calculate_support_score($b) - $this->calculate_support_score($a);
 		});
 		for ($i = 0; $i < min(10,sizeof($all_players)); $i++)
 			$this->other_players[$i] = $all_players[$i];
 
-		/*
-		$player_win_rates = array();
-		//Put all win rates into an array.
-		for ($i = 0; $i < sizeof($all_players); $i++) {
-			$win_percent = $this->calculate_support_score($all_players[$i]);
-			array_push($player_win_rates, $win_percent);
-		}
-
-		//Assign top best players. 
-		for ($i = 0; $i < 10; $i++) {
-			if ($i < sizeof($all_players)) {
-				$best_player = array_keys($player_win_rates, max($player_win_rates));
-				$player_win_rates[$best_player[0]] = 0;	
-				$this->other_players[$i] = $all_players[$best_player[0]];
-			}
-		}*/
 	}
 
 	private function calculate_support_score(&$player) {
@@ -107,7 +96,7 @@ class PlayerSystem {
 		if ($this->player_database_operations->contains_ID($player->get_id())) {
 			//Player needs to be updated, only need PID to check.
 			if ($this->player_database_operations->player_needs_update($player->get_id())) {
-				$player->api_construct();
+				$player->api_construct($player->get_name(), $player->get_region());
 				if ($this->player_valid($player)) {
 					$this->player_database_operations->update_player($player);
 				}
@@ -117,7 +106,7 @@ class PlayerSystem {
 			} 
 		//TODO: throw error messages to user when player is not valid
 		} else {
-			$player->api_construct();
+			$player->api_construct($player->get_name(), $player->get_region());
 			if ($this->player_valid($player)) {
 				$this->player_database_operations->add_player($player);
 			}

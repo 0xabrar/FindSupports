@@ -4,12 +4,6 @@ include_once('player.php');
 
 class PlayerDatabaseOperations {
 
-	private $localhost = "localhost";
-	private $user = "root";
-	private $password = "candy12";
-	private $db = "summoners";
-	private $con;
-
 	/* TABLE format is PID, name, games_played, games_won, win_percent, 
   		avg_assists, most_played_support, lolking, date_added 
   		Add information into the table. */
@@ -17,8 +11,10 @@ class PlayerDatabaseOperations {
 	function __construct() {
 		$this->con = mysqli_connect("localhost", "root", "candy12", "summoners");
 		// Check connection
-		if (!$this->con) {
-  			echo "Failed to connect to MySQL: " . mysqli_connect_error();
+		if (!$this->con) {	
+			//TODO: relocate to error page
+			header("Location: /index.php");
+  			
   		}
 	}
 

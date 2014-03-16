@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
   <!-- Bootstrap -->  
-  <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
   <link href='http://fonts.googleapis.com/css?family=Cinzel|Montserrat' rel='stylesheet' type='text/css'>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -20,7 +20,7 @@
   
   <body>
     <style> 
-    body { background: url(./images/results_background.png) no-repeat center center fixed; 
+    body { background: url(/images/results_background.png) no-repeat center center fixed; 
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
@@ -33,7 +33,7 @@
         <!-- The div that holds the title -->
         <div class="center-block">
           <br><br>
-          <a href ="index.php"> <img src="images/logo.png" class="center-block"> 
+          <a href ="/index.php"> <img src="/images/logo.png" class="center-block"> 
           </img> </a>
         </div>
       </div>
@@ -60,10 +60,8 @@
 
             <tbody>
               <?php
-               //$mst = microtime(true);
-              //global $mst;
-              //echo __FILE__,__LINE__,":",(microtime(true)-$mst),"<br>";
-              include('player_system.php'); 
+
+              include('playersystem/player_system.php'); 
               //TODO: make different regions function for api calls
               $summoner_name = $_GET["summoner"];
               $playerSystem = new PlayerSystem($summoner_name, "na");
