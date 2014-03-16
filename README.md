@@ -23,12 +23,12 @@ Improve and error check on PlayerSystem:
 - etc.
 
 ####Front-end TODO:
--fix footer on index.php
--clean up code for index.php (too many <br>)
--Add region box on index.php
--Need error boxes to display when summoenr doesn't exist, when summoner under lvl 30 or when summoenr is in challenger
--Fiddlesticks in results page needs to be fixed. Cut off from top right and bottom right
--Page needs favicons
+- fix footer on index.php
+- clean up code for index.php (too many break tags)
+- Add region box on index.php
+- Need error boxes to display when summoenr doesn't exist, when summoner under lvl 30 or when summoenr is in challenger
+- Fiddlesticks in results page needs to be fixed. Cut off from top right and bottom right
+- Page needs favicons
 
 
 #####Changelog
