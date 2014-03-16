@@ -34,12 +34,11 @@
                <form class="input-group" role="form" method="get" action="results.php">
                   <input type="text" class="form-control form-inline" id="summonerSearchBar" placeholder="Enter your summoner name" name="summoner">
                       <div class="input-group-btn">
-                            <button type="button" class="btn btn-default dropdown-toggle" id="regionDropdown" data-toggle="dropdown">NA <span class="caret"></span></button>
-                                <ul class="dropdown-menu pull-left">
-                                    <li name="na"><a href="#">EUNE</a></li>
-                                    <li name="eune"><a href="#">EUW</a></li>
-                                    <li name="euw"><a href="#">NA</a></li>
-                                  </ul>
+                        <select name="region" class="btn btn-default dropdown-toggle" id="regionDropdown" data-toggle="dropdown">
+                          <option selected="selected" value="na"> NA </option>
+                          <option value="eune"> EUNE </option>
+                          <option value="euw"> EUW </option>
+                        </select>
                                &nbsp;
                                &nbsp;       
                             <button class="btn btn-info" id="searchButton" type="submit">Search</button>
