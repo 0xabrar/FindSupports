@@ -19,7 +19,6 @@ class PlayerSystem {
 	private $player_database_operations;
 	
 	function __construct($summoner_name, $region) {
-
 		/** Constructor for a PlayerSystem. This takes the original summoner for which
 		the PlayerSystem is instantiated and uses it as the central point. Other summoners
 		with similar mmrs to the main player will be found in the database and have instances
@@ -51,11 +50,11 @@ class PlayerSystem {
 
 		//Create an array of Players from all other summoner data.
 		for ($i = 0; $i < sizeof($this->other_players_data); $i++) {
-			$summoner_name = $other_players_data[0][$i]['name'];
-			$region = $other_players_data[0][$i]['region'];
-			$player = new Player($summoner_name, $region);
+			$summoner_name = $this->other_players_data[$i]['name'];
+			$region = $this->other_players_data[$i]['region'];
+			$player = new Player($summoner_name, $region, false);
 			//Operate on each individual player.
-			//$this->operate_player($player);
+			//$this->operate_player($player); TODO: this doesn't work do to rate limits
 			$player->set_all_information($this->other_players_data[$i]);
 			array_push($all_players, $player);
 		}

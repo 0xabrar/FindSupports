@@ -62,6 +62,20 @@ class Player {
 		$this->calculate_mmr();
 	}
 
+	public function print_data(){
+		/** Solely used for diagnostic purposes. */
+		echo "Region: " , $this->region , "<br>";
+		echo "Name: " , $this->name , "<br>";
+		echo "ID: " . $this->id . "<br>";
+		echo "Games played: " . $this->games_played . "<br>";
+		echo "Games won: " . $this->games_won . "<br>";
+		echo "Win percent: " . $this->win_percent . "<br>";
+		echo "Average assists: " . $this->avg_assists . "<br>";
+		echo "lolking: " . $this->lolking_profile . "<br>"; 
+		echo "mmr: " . $this->mmr . "<br>";
+		echo "Most played support: " . $this->most_played_support_name . "<br>";
+	}
+
 	private function set_support_stats() {
 		/** Set the actual stats related to most played support for instance. */
 		$this->games_played = $this->most_played_support["stats"]["totalSessionsPlayed"];

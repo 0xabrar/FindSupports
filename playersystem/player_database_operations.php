@@ -67,7 +67,8 @@ class PlayerDatabaseOperations {
 			win_percent = '$win_percent', 
 			avg_assists = '$avg_assists',
 			most_played_support = '$most_played_support',
-			mmr = '$mmr' 
+			mmr = '$mmr', 
+			date_added = UNIX_TIMESTAMP()
 			WHERE PID = $id";
 
 		$query = mysqli_query($this->con, $sql);
@@ -101,8 +102,8 @@ class PlayerDatabaseOperations {
     	$name = $player->get_name();
     	$region = $player->get_region();
 
-    	$mmr_max = $mmr + 20;
-    	$mmr_min = $mmr - 20;
+    	$mmr_max = $mmr + 40;
+    	$mmr_min = $mmr - 40;
 
     	$sql = "SELECT * from support WHERE 
     			region = '$region' 
