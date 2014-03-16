@@ -73,7 +73,7 @@ class Player {
 		echo "Average assists: " . $this->avg_assists . "<br>";
 		echo "lolking: " . $this->lolking_profile . "<br>"; 
 		echo "mmr: " . $this->mmr . "<br>";
-		echo "Most played support: " . $this->most_played_support_name . "<br>";
+		echo "Most played support: " . $this->most_played_support_name . "<br><br>";
 	}
 
 	private function set_support_stats() {
@@ -105,6 +105,12 @@ class Player {
 		call based on summoner name. */
 		$summoner_api = $this->api->getSummonerByName($this->name);
 		$summoner = json_decode($summoner_api, true);
+
+		//TODO: error messages for summoner level
+		$summoner_level = $summoner["summonerLevel"];
+		if ($summoner_level != 30) {
+			throw new Exception("Error Processing Request", 1);
+		} 
 		$this->id = $summoner["id"];
 	}
 
@@ -152,10 +158,16 @@ class Player {
 
 		//League information formatted as Array[0] == Array
 		$summoner_tier = $summoner_league[0]["tier"];
-		$summoner_division = $summoner_league[0]["rank"];
-
 		$mmr += $this->convert_summoner_tier($summoner_tier);
-		$mmr += $this->convert_summoner_division($summoner_division);
+		//Do not want to try to find tier for challenger players
+		if ($summoner_tier != "CHALLENGER") {
+			$summoner_division = $summoner_league[0]["rank"];
+			$mmr += $this->convert_summoner_division($summoner_division);
+		}
+		
+
+		
+		
 		$this->mmr = $mmr;
 	}
 

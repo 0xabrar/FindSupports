@@ -108,7 +108,7 @@ class PlayerDatabaseOperations {
     	$sql = "SELECT * from support WHERE 
     			region = '$region' 
     			AND mmr BETWEEN '$mmr_min' AND '$mmr_max' 
-    			AND win_percent >= 70 AND win_percent <= 100
+    			AND win_percent >= 52 AND win_percent <= 100
     			AND NOT name = '$name'";
     	$query = mysqli_query($this->con, $sql);
     	

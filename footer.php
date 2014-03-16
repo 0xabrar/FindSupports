@@ -15,14 +15,17 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
+
+
+
     </head>
 
     <body>
 
-    	<div style="position: relative; bottom: 0px;"
+    	<div style="position: relative; bottom: 0px; background-color:black; outline:grey double thin;"
     	<p style="position:fixed; bottom:0; width:100%">
-    		<center><small style="color:#B5B5B5; font-size:0.8em;">Follow us on <a href='https://twitter.com/abrarisme/lists/renderless'>
-    			Twitter. </a>FindMeASupport is not
+    		<center><small style="color:#B5B5B5; font-size:0.9em;">Follow us on <a href='https://twitter.com/abrarisme/lists/renderless'>
+    			Twitter. </a>Send us a <a href="mailto:admin@findmeasupport.com">message. </a>FindMeASupport is not
     			endorsed by and does not reflect the views or opinions of Riot Games, Inc. or any of its affilates.
     		</small></center>
     	</p>

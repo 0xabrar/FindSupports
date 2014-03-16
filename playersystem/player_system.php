@@ -39,7 +39,8 @@ class PlayerSystem {
 	public function get_player($which_player) {
 		/** Return the a new Player instance specified from other summoners. 
 		Pre: $which_player is an integer from 0-9, inclusive. */
-		return $this->other_players[$which_player];
+		$player =  $this->other_players[$which_player];
+		return $player;
 	}
 
 	private function sort_other_players() {
