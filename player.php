@@ -117,7 +117,7 @@ class Player {
 		/** Go through the listing of support champions that the Player plays,
 		and then set the most played support as the champion with highest total sessions. */
 		$max = 0;
-		$most_played_support;
+		$most_played_support;	
 		foreach($this->support_champions as $support) {
 			if ($support["stats"]["totalSessionsPlayed"] > $max) {
 				$max = $support["stats"]["totalSessionsPlayed"];
@@ -148,13 +148,13 @@ class Player {
 	private function convert_summoner_tier($summoner_tier) {
 		/** Return points associated with the specific tier of the player. */
 		$tier = array(
-    		"CHALLENGER" => 500,
-    		"DIAMOND" => 400,
-    		"PLATINUM"  => 300,
-    		"GOLD" => 200,
-    		"SILVER" => 100 ,
-    		"BRONZE" => 0 
-		);
+			"CHALLENGER" => 500,
+			"DIAMOND" => 400,
+			"PLATINUM"  => 300,
+			"GOLD" => 200,
+			"SILVER" => 100 ,
+			"BRONZE" => 0 
+			);
 		return $tier[$summoner_tier];
 	}
 
@@ -166,7 +166,7 @@ class Player {
 			"III" => 60 ,
 			"IV" => 40 ,
 			"V" => 20
-		);
+			);
 		return $tier[$summoner_division]; 
 	}
 
