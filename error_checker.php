@@ -8,6 +8,11 @@ include_once('playersystem/php-riot-api.php');
 $summoner_name = $_REQUEST["summoner"];
 $region = $_REQUEST["region"];
 
+//Take split up names and combine them.
+$summoner_name = explode('+', $summoner_name);
+$summoner_name = implode($summoner_name);
+$summoner_name = str_replace(' ', '', $summoner_name);
+
 //Get summoner stats from League API.
 $api = new riotapi($region);
 $summoner_api = $api->getSummonerByName($summoner_name);
