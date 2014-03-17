@@ -27,7 +27,7 @@ Improve and error check on PlayerSystem:
 - clean up code for index.php (too many break tags)
 - Add region box on index.php [Done, but Abrar needs to actually access the values]
 - Need error boxes to display when summoenr doesn't exist, when summoner under lvl 30 or when summoenr is in challenger
-- Fiddlesticks in results page needs to be fixed. Cut off from top right and bottom right
+- Fiddlesticks in results page needs to be fixed. Cut off from top right and bottom right [Done]
 - Page needs favicons
 
 
