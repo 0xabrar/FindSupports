@@ -16,7 +16,7 @@
         <![endif]-->
       </head>
       <body>
-        <style> body {background-image:url("/images/background.png"); background-repeat: no-repeat; background-size: cover } </style>
+        <style> body {background-image:url("/images/background.png"); background-repeat: no-repeat; background-size: 100% } </style>
 
         <div class ="container" style="margin-top:12%">
           <div class="center-block">
@@ -32,7 +32,7 @@
           <div class="col-md-8 col-md-offset-2">
             <div class="col-lg-12">
              <form id="summonerForm" class="input-group" role="form" method="get" action="error_checker.php">
-              <input type="text" class="form-control form-inline" id="summoner" placeholder="Enter your summoner name" name="summoner">
+              <input type="text" class="form-control form-inline" id="summonerSearchBar" placeholder="Enter your summoner name" name="summoner">
               <div class="input-group-btn">
                 <select name="region" class="btn btn-default dropdown-toggle" id="regionDropdown" data-toggle="dropdown">
                   <option selected="selected" value="na"> NA </option>
@@ -89,7 +89,7 @@
       /* stop form from submitting normally */
       event.preventDefault();
       /* Send the data to be verified that it is correct as a summoner. */
-      $.get( "error_checker.php", { summoner: $('#summoner').val(), region: $('#regionDropdown').val() }, function(data) {
+      $.get( "error_checker.php", { summoner: $('#summonerSearchBar').val(), region: $('#regionDropdown').val() }, function(data) {
       //Checks if the returned data contains an error. 
       var contains = (data.indexOf('error')) >  -1;
       if (!contains) {

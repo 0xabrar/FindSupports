@@ -105,8 +105,6 @@ class Player {
 		call based on summoner name. */
 		$summoner_api = $this->api->getSummonerByName($this->name);
 		$summoner = json_decode($summoner_api, true);
-		$summoner_level = $summoner["summonerLevel"];
-		
 		$this->id = $summoner["id"];
 	}
 
@@ -152,17 +150,22 @@ class Player {
 		$summoner_api = $this->api->getLeague($this->id);
 		$summoner_league = json_decode($summoner_api, true);
 
+		//Want to make sure  we select ranked solo stats.
+		$solo_queue_index = 0;
+		for ($i = 0; $i < count($summoner_league); $i++) {
+			if ($summoner_league[$i]['queueType'] == 'RANKED_SOLO_5x5') {
+				$solo_queue_index = $i;
+			}
+		}
+
 		//League information formatted as Array[0] == Array
-		$summoner_tier = $summoner_league[0]["tier"];
+		$summoner_tier = $summoner_league[$solo_queue_index]["tier"];
 		$mmr += $this->convert_summoner_tier($summoner_tier);
 		//Do not want to try to find tier for challenger players
 		if ($summoner_tier != "CHALLENGER") {
-			$summoner_division = $summoner_league[0]["rank"];
+			$summoner_division = $summoner_league[$solo_queue_index]["rank"];
 			$mmr += $this->convert_summoner_division($summoner_division);
 		}
-		
-
-		
 		
 		$this->mmr = $mmr;
 	}
