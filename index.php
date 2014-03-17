@@ -110,6 +110,8 @@
       document.getElementById("message").innerHTML = "That is not a valid summoner. Check spelling and region!";
     } else if (error == 'under30') {
       document.getElementById("message").innerHTML = "The summoner must be level 30.";
+    } else if (error == 'rate_limit') {
+      document.getElementById("message").innerHTML = "The server is reaching capacity. Please wait a while.";
     }
     display_error();
   }
