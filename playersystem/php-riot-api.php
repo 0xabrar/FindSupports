@@ -64,7 +64,7 @@ class riotapi {
 		$call = 'game/by-summoner/' . $id . '/recent';
 
 		//add API URL to the call
-		$call = self::API_URL_1_2 . $call;
+		$call = self::API_URL_1_3 . $call;
 
 		return $this->request($call);
 	}

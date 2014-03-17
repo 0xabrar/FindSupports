@@ -46,7 +46,7 @@
         <div class="center-block">
 
           <table class="table table-striped table-bordered table-condensed table-hover" 
-          style="border-color:black; width:75%; margin-left:auto ; margin-right: auto;">  
+          style="border-color:black; border-width: 3  px; width:80%; margin-left:auto ; margin-right: auto;">  
           <thead>  
             <tr>  
               <th><center>Summoner Name</center></th>  
@@ -61,14 +61,32 @@
             <tbody>
               <?php
 
+              //Need to validate input before it works with the system.
+              function validate_input($data) {
+                $data = trim($data);
+                $data = stripslashes($data);
+                $data = htmlspecialchars($data);
+                return $data;
+              }
+
               include('playersystem/player_system.php'); 
               //TODO: make different regions function for api calls
               $summoner_name = $_GET["summoner"];
               $region = $_GET["region"];
+
+              $summoner_name = validate_input($summoner_name);
+              $region = validate_input($region);
+
+
               $playerSystem = new PlayerSystem($summoner_name, $region);
 
               for ($i = 0; $i < 10; $i++) {
                 $player = $playerSystem->get_player($i);
+
+                //No matching players were found.
+                if ($i == 0 and $player == null) {
+                  //TODO: print off material indicating  no matches found.
+                }
 
                 //At least 10 players must exist. The object may be null.
                 if ($player != null) {
@@ -91,7 +109,8 @@
                   echo "</tr>";       
                 }
                 
-              }?>
+              }
+              ?>
 
             </tbody>  
           </table>

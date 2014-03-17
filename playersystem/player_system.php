@@ -31,6 +31,8 @@ class PlayerSystem {
 		//Retrieve listing of all other plays near the current player's mmr. 
 		$this->other_players_data = $this->player_database_operations->get_other_players($this->current_player);
 		$this->sort_other_players();
+
+		//$this->current_player->print_data();
 		
 		//TODO: print error when user is not playing ranked
 		$this->player_database_operations->close_db();
