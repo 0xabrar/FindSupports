@@ -16,7 +16,10 @@
         <![endif]-->
       </head>
       <body>
-        <style> body {background-image:url("/images/background.png"); background-repeat: no-repeat; background-size: cover } </style>
+        <style> body {background-image:url("/images/background.png"); background-attachment: fixed; 
+background-repeat: no-repeat; 
+-moz-background-size:100% 100%; 
+background-size:100% 100%; } </style>
 
         <div class ="container" style="margin-top:12%">
           <div class="center-block">
