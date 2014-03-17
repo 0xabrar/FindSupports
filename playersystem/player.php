@@ -105,12 +105,8 @@ class Player {
 		call based on summoner name. */
 		$summoner_api = $this->api->getSummonerByName($this->name);
 		$summoner = json_decode($summoner_api, true);
-
-		//TODO: error messages for summoner level
 		$summoner_level = $summoner["summonerLevel"];
-		if ($summoner_level != 30) {
-			throw new Exception("Error Processing Request", 1);
-		} 
+		
 		$this->id = $summoner["id"];
 	}
 

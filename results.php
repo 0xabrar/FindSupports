@@ -64,6 +64,7 @@
               include('playersystem/player_system.php'); 
               //TODO: make different regions function for api calls
               $summoner_name = $_GET["summoner"];
+              $region = $_GET["region"];
               $playerSystem = new PlayerSystem($summoner_name, "na");
 
               for ($i = 0; $i < 10; $i++) {

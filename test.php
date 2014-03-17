@@ -13,7 +13,6 @@
       <option value="eune">EUNE</option>
     </select>       
     <button type="submit" id="submitButton">Search</button>
-
   </form>
 
 
@@ -25,8 +24,7 @@
     </table>
   </div>
 
-
-<?php
+  <?php
 /*
 define('SERV_ROOT', '/var/www/html');
 include(SERV_ROOT . '/playersystem/player_system.php');
@@ -39,41 +37,52 @@ for ($i = 0; $i < 10; $i++) {
 }*/?>
 
 <script type='text/javascript'>
-    /* attach a submit handler to the form */
+/* attach a submit handler to the form */
 
-    $(document).ready(function(){
-        $("#errorMessage").hide();
-    });
-    
-
-    $("#summonerForm").submit(function(event) {
-
-      /* stop form from submitting normally */
-      event.preventDefault();
-
-      /* get some values from elements on the page: */
-      var $form = $( this ),
-          url = $form.attr( 'action' );
-
-      /* Send the data using get */
-      var posting = $.post( "error_checker.php", { summoner: $('#summoner').val(), region: $('#region').val() } );
-
-      /* Put the results in a div */
-      posting.done(function( data ) {
-        if (data == "fuck me") {
-          $("#errorMessage").fadeIn(500);
-          document.getElementById("errorMessage").innerHTML = data;
-          setTimeout(function() {$("#errorMessage").fadeOut(500);}, 2000);
-        } else {
-          document.getElementById("errorMessage").innerHTML="what";
-        }
-        
-
-      });
+//Error message is hidden by default.
+$(document).ready(function(){
+  $("#errorMessage").hide();
+});
 
 
+//Call this material when users submit the summoner form.
+$("#summonerForm").submit(function(event) {
+  /* stop form from submitting normally */
+  event.preventDefault();
+  /* Send the data to be verified that it is correct as a summoner. */
+  $.get( "error_checker.php", { summoner: $('#summoner').val(), region: $('#region').val() }, function(data) {
+    //Checks if the returned data contains an error. 
+    var contains = (data.indexOf('error')) >  -1;
+    if (!contains) {
+      window.location="results.php?" + data;
+    } else {
+      var json = JSON.parse(data);
+      var error = json['error'];
+      handle_error(error);
+    }
+  });
+});
 
-    });
+//Based on the error raised, change the error info given.
+function handle_error(error) {
+  if (error == 'empty_name') {
+    document.getElementById("errorMessage").innerHTML = "Please enter a summoner name.";
+  } else if (error == 'no_summoner') {
+    document.getElementById("errorMessage").innerHTML = "That is not a valid summoner. Check spelling and region!";
+  } else if (error == 'under30') {
+    document.getElementById("errorMessage").innerHTML = "The summoner must be level 30.";
+  }
+  display_error();
+}
+
+//Display the error box.
+function display_error() {
+  $("#errorMessage").fadeIn(500);
+  setTimeout(function() {$("#errorMessage").fadeOut(500);}, 2000);
+}
+
+
+
 </script>
 
 </body>
