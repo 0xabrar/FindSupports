@@ -13,17 +13,6 @@ $summoner_name = explode('+', $summoner_name);
 $summoner_name = implode($summoner_name);
 $summoner_name = str_replace(' ', '', $summoner_name);
 
-//Get summoner stats from League API.
-$api = new riotapi($region);
-$summoner_api = $api->getSummonerByName($summoner_name);
-$summoner = json_decode($summoner_api, true);
-
-//Store relevant information: ID, name, level. 
-$summoner_api_name = $summoner['name'];
-$id = $summoner['id'];
-$level = $summoner['summonerLevel'];
-
-
 //Check for valid input and send back relevant errors.
 //The name entered cannot be empty.
 try {
@@ -34,6 +23,28 @@ try {
 	echo json_encode(array('error' => $e->getMessage()));
 	return;
 }
+
+//Get summoner stats from League API.
+$api = new riotapi($region);
+$summoner_api = $api->getSummonerByName($summoner_name);
+$summoner = json_decode($summoner_api, true);
+
+//Rate limit has been reached.
+try {
+	if (array_key_exists('status', $summoner)) {
+		throw new Exception('rate_limit');
+	} 
+}catch (Exception $e) {
+	echo json_encode(array('error' => $e->getMessage()));
+	return;
+}
+
+
+//Store relevant information: ID, name, level. 
+$summoner_api_name = $summoner['name'];
+$id = $summoner['id'];
+$level = $summoner['summonerLevel'];
+
 
 //Summoner must exist on League of Legends.
 try {

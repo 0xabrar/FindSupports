@@ -142,6 +142,10 @@ class PlayerSystem {
 		return true;
 	}
 
+	public function current_player_valid() {
+		return $this->player_valid($this->current_player);
+	}
+
 
 	
 }

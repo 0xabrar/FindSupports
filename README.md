@@ -12,26 +12,15 @@ localbranch -> incremental changes
 
 #####Functionality Needed
 1. Improve overall visuals.
-2. Improve and error check on PlayerSystem
 3. Add in details about Twitter, Google Analytics, etc.
-4. Show error messages back to users.
 
 #####Sprint Details
-Improve and error check on PlayerSystem:
-- need to rate limit API calls
-- improve checks for when name doesn't exist
-- etc.
-
-####Front-end TODO:
-- fix footer on index.php  [Done]
-- clean up code for index.php (too many break tags)
-- Add region box on index.php [Done, but Abrar needs to actually access the values]
-- Need error boxes to display when summoenr doesn't exist, when summoner under lvl 30 or when summoenr is in challenger
-- Fiddlesticks in results page needs to be fixed. Cut off from top right and bottom right [Done]
-- Page needs favicons
-
+Improve overall visuals:
+- redesign logo
+- get rid of janna on first page
 
 #####Changelog
+- v3.0 Working system on all regions with error checks. (March 18 2014)
 - v2.2 Updated UI and have properly functional calculations. (March 14 2014)
 - v2.0 Prototype functionality out. (March 12 2014)
 - v1.7 All backend functionality completed to work correctly. (March 8 2014)

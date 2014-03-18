@@ -5,11 +5,9 @@ include_once('player_system.php');
 include_once('php-riot-api.php');
 
 
-$seed = 'googleme85';
+$seed = 'YannTremblay99';
 $region = 'na';
 
-$called_players = array();
-$players_added = 0;
 recurse_players($seed, $region);
 
 
@@ -27,7 +25,7 @@ function recurse_players($name, $region) {
 	$gameStats = $gameStats['games'][0]['fellowPlayers'];
 
 	for ($i = 0; $i < count($gameStats); $i++) {
-		sleep(3); //API limits
+		sleep(5); //API limits
 		$new_id = $gameStats[$i]['summonerId'];
 
 		$new_api = $api->getSummoner($new_id);
@@ -36,11 +34,7 @@ function recurse_players($name, $region) {
 		$name = $new_api['name'];
 		global $called_players;
 
-		//Make sure not to call construct on already done name
-		if (!(in_array($name, $called_players))) {
-			create_system($name, $region);
-		} 
-		array_push($called_players, $name);
+		create_system($name, $region);
 
 		//Recursion ayaah.
 		if ($i == (count($gameStats) - 1)) {

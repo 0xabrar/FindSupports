@@ -80,52 +80,65 @@
 
               $playerSystem = new PlayerSystem($summoner_name, $region);
 
-              for ($i = 0; $i < 10; $i++) {
-                $player = $playerSystem->get_player($i);
+              if ($playerSystem->current_player_valid()) {
+                for ($i = 0; $i < 10; $i++) {
+                  $player = $playerSystem->get_player($i);
 
                 //No matching players were found.
-                if ($i == 0 and $player == null) {
-                  //TODO: print off material indicating  no matches found.
-                }
+                  if ($i == 0 and $player == null) {
+                    echo"<tr  height=\"50\"> ";
+                    echo "<td colspan='6' style=\"vertical-align: middle\"><center>" . "Could not find suitable matches. Sorry :(" . "</center></td>";
+                      echo "</tr>";
+                    }
 
                 //At least 10 players must exist. The object may be null.
-                if ($player != null) {
-                  $playerName = $player->get_name();
-                  $playerPlayed = $player->get_games_played();
-                  $playerWon = $player->get_games_won();
-                  $playerPercent = $player->get_win_percent();
-                  $playerAssists = $player->get_avg_assists();
-                  $playerChampion = $player->get_most_played_support();
-                  $playerProfile = $player->get_lolking();
+                    if ($player != null) {
+                      $playerName = $player->get_name();
+                      $playerPlayed = $player->get_games_played();
+                      $playerWon = $player->get_games_won();
+                      $playerPercent = $player->get_win_percent();
+                      $playerAssists = $player->get_avg_assists();
+                      $playerChampion = $player->get_most_played_support();
+                      $playerProfile = $player->get_lolking();
 
 
+                      echo"<tr  height=\"50\"> ";
+                      echo "<td style=\"vertical-align: middle\"><center><a href=\"" .$playerProfile. "\">" .$playerName. "</a></center></td>";
+                      echo "<td style=\"vertical-align: middle\"><center>" .$playerPlayed. "</center></td>";
+                      echo "<td style=\"vertical-align: middle\"><center>" .$playerWon. "</center></td>";
+                      echo "<td style=\"vertical-align: middle\"><center>" .$playerPercent. "</center></td>";
+                      echo "<td style=\"vertical-align: middle\"><center>" .$playerAssists. "</center></td>";
+                      echo "<td style=\"vertical-align: middle\"><img src=\"images/champion_icons/janna.png\" height=\"40\" width=\"40\" style=\"margin-left:8%;\"><div style=\"display:inline; margin-left:2em;\">"  .$playerChampion. "</div></td>";
+                      echo "</tr>";       
+                    }
+
+                  }
+                } else {
                   echo"<tr  height=\"50\"> ";
-                  echo "<td style=\"vertical-align: middle\"><center><a href=\"" .$playerProfile. "\">" .$playerName. "</a></center></td>";
-                  echo "<td style=\"vertical-align: middle\"><center>" .$playerPlayed. "</center></td>";
-                  echo "<td style=\"vertical-align: middle\"><center>" .$playerWon. "</center></td>";
-                  echo "<td style=\"vertical-align: middle\"><center>" .$playerPercent. "</center></td>";
-                  echo "<td style=\"vertical-align: middle\"><center>" .$playerAssists. "</center></td>";
-                  echo "<td style=\"vertical-align: middle\"><img src=\"images/champion_icons/janna.png\" height=\"40\" width=\"40\" style=\"margin-left:8%;\"><div style=\"display:inline; margin-left:2em;\">"  .$playerChampion. "</div></td>";
-                  echo "</tr>";       
+                    echo "<td colspan='6' style=\"vertical-align: middle\"><center>" . "Looks like you don't play ranked. 
+                    We don't have stats for you. Sorry :(" . "</center></td>";
+                      echo "</tr>";
                 }
-                
-              }
-              ?>
 
-            </tbody>  
-          </table>
+
+                ?>
+
+              </tbody>  
+            </table>
+          </div>
         </div>
       </div>
-    </div>
 
-    <?php 
-    include('footer.php')
-    ?>
+      <br><br>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js\"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bootstrap/js/bootstrap.min.js\"></script>
-  </body> 
-  </html>
+      <?php 
+      include('footer.php')
+      ?>
+
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="https://code.jquery.com/jquery.js\"></script>
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <script src="bootstrap/js/bootstrap.min.js\"></script>
+    </body> 
+    </html>
 

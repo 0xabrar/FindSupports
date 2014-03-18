@@ -51,21 +51,20 @@
         </div><!-- /.col-lg-6 -->
       </div>
 
+      <br>
       <!-- Error message box -->
       <div id = "errorMessage"><center>
-        <table style="border: 1px solid black;" >
+        <table style="background-color: black; border: 0px; border-radius: 10px; box-shadow: 0px 0px 5px black;" >
           <tr>
-            <td id = "message">Error message to display.</td>
+            <td id = "message" style="padding: 5px; color:#B5B5B5;">Error message to display.</td>
           </tr> 
         </table></center>
       </div>
     </div>
 
 
-    
 
-    <!-- TODO: wtf raunaq there's some clear as hell inconsistency if I have to do this bullshit -->
-    <br><br><br><br><br><br><br><br><br><br><br><br>
+    
     <?php
     include_once('footer.php'); 
     ?>
@@ -107,7 +106,7 @@
     if (error == 'empty_name') {
       document.getElementById("message").innerHTML = "Please enter a  summoner name.";
     } else if (error == 'no_summoner') {
-      document.getElementById("message").innerHTML = "That is not a valid summoner. Check spelling and region!";
+      document.getElementById("message").innerHTML = "That is not a valid summoner. Check spelling and region.";
     } else if (error == 'under30') {
       document.getElementById("message").innerHTML = "The summoner must be level 30.";
     } else if (error == 'rate_limit') {
