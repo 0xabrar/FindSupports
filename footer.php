@@ -22,8 +22,8 @@
 
     <body>
 
-    	<div style="position: relative; bottom: 0px; background-color:black; outline:grey double thin;"
-    	<p style="position:fixed; bottom:0; width:100%">
+    	<div style="position: relative; bottom: 0px; background-color:black; outline:grey double thin; position:fixed; bottom:0; width:100%; margin-top:-7%; height:4%; margin-bottom:3%">
+    	<p>
     		<center><small style="color:#B5B5B5; font-size:0.9em;">Follow us on <a href='https://twitter.com/abrarisme/lists/renderless'>
     			Twitter. </a>Send us a <a href="mailto:admin@findmeasupport.com">message. </a>FindMeASupport is not
     			endorsed by and does not reflect the views or opinions of Riot Games, Inc. or any of its affilates.
