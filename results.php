@@ -28,16 +28,14 @@
     } 
     </style>
 
-    <div class ="container" style="margin-top:10%">
-      <div class="center-block">
-        <!-- The div that holds the title -->
-        <div class="center-block">
-          <br><br>
-          <a href ="/index.php"> <img src="/images/logo.png" class="center-block"> 
-          </img> </a>
+   <div class ="container" style="margin-top:20%">
+          <div class="center-block">
+            <!-- The div that holds the title -->
+            <div class="center-block">
+              <a href ="/index.php" class="center-block" id="logo"> Find Me A Support </a>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
     
 
     <div class ="container" style="margin-top:0%">
