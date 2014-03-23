@@ -100,15 +100,19 @@ class PlayerDatabaseOperations {
     	$mmr = $player->get_mmr();
     	$name = $player->get_name();
     	$region = $player->get_region();
-
     	$mmr_max = $mmr + 20;
     	$mmr_min = $mmr - 20;
 
+    	//Makes a bit of sense to have a limit of 0 for min.
+    	if ($mmr_min < 0) {
+    		$mmr_min = 0;
+    	}
+
     	$sql = "SELECT * from support WHERE 
     			region = '$region' 
-    			AND mmr BETWEEN '$mmr_min' AND '$mmr_max' 
-    			AND win_percent >= 50 AND win_percent <= 100
-    			AND NOT name = '$name'	";
+    			AND mmr BETWEEN $mmr_min AND $mmr_max 
+    			AND win_percent >= 60 AND win_percent <= 100
+    			AND NOT name = '$name'";
     	$query = mysqli_query($this->con, $sql);
     	
     	//Error occured with getting the necessary information.

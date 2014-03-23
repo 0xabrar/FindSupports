@@ -34,7 +34,6 @@ class PlayerSystem {
 
 		//$this->current_player->print_data();
 		
-		//TODO: print error when user is not playing ranked
 		$this->player_database_operations->close_db();
 	}
 
@@ -49,15 +48,19 @@ class PlayerSystem {
 		/** Goes through the other players and sorts them 
 		according to win rate and games won. Make the top 10 support summoners
 		the other_players in the PlayerSystem. */
+
 		$all_players = array();
+		//Want to randomize for large sets.
+		shuffle($this->other_players_data); 
 
 		//Create an array of Players from all other summoner data.
-		for ($i = 0; $i < sizeof($this->other_players_data); $i++) {
+		for ($i = 0; $i < min(sizeof($this->other_players_data), 20); $i++) {
 			$summoner_name = $this->other_players_data[$i]['name'];
 			$region = $this->other_players_data[$i]['region'];
 			$player = new Player($summoner_name, $region, false);
 			//Operate on each individual player.
-			//$this->operate_player($player); TODO: this doesn't work do to rate limits
+			//TODO: this doesn't work due to rate limits
+			//$this->operate_player($player); 
 			$player->set_all_information($this->other_players_data[$i]);
 			array_push($all_players, $player);
 		}
@@ -106,7 +109,6 @@ class PlayerSystem {
 			} else {
 				$this->update_player_instance($player);
 			} 
-		//TODO: throw error messages to user when player is not valid
 		} else {
 			$player->api_construct($player->get_name(), $player->get_region());
 			if ($this->player_valid($player)) {
@@ -126,7 +128,7 @@ class PlayerSystem {
 		$player->set_all_information($info);
 	}
 
-	private function player_valid($player) {
+	private function player_valid() {
 		/** A predicate function which returns 
 		true if and only if all the information for a Player instance is valid. */
 		if ($this->current_player->get_name() == "") return false;
@@ -142,9 +144,14 @@ class PlayerSystem {
 		return true;
 	}
 
-	public function current_player_valid() {
-		return $this->player_valid($this->current_player);
+	public function player_plays_ranked() {
+		/** Return true if and only if the player plays ranked. */
+		if ($this->current_player->get_name() == "") return false;
+		if ($this->current_player->get_id() == "") return false;
+		if ($this->current_player->get_mmr() == "") return false;
+		return true;
 	}
+
 
 
 	

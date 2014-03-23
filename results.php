@@ -68,7 +68,7 @@
               }
 
               include('playersystem/player_system.php'); 
-              //TODO: make different regions function for api calls
+              
               $summoner_name = $_GET["summoner"];
               $region = $_GET["region"];
 
@@ -78,7 +78,7 @@
 
               $playerSystem = new PlayerSystem($summoner_name, $region);
 
-              if ($playerSystem->current_player_valid()) {
+              if ($playerSystem->player_plays_ranked()) {
                 for ($i = 0; $i < 10; $i++) {
                   $player = $playerSystem->get_player($i);
 
@@ -109,7 +109,6 @@
                       echo "<td style=\"vertical-align: middle\"><img src=\"images/champion_icons/janna.png\" height=\"40\" width=\"40\" style=\"margin-left:8%;\"><div style=\"display:inline; margin-left:2em;\">"  .$playerChampion. "</div></td>";
                       echo "</tr>";       
                     }
-
                   }
                 } else {
                   echo"<tr  height=\"50\"> ";
