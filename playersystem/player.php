@@ -105,7 +105,8 @@ class Player {
 		call based on summoner name. */
 		$summoner_api = $this->api->getSummonerByName($this->name);
 		$summoner = json_decode($summoner_api, true);
-		$this->id = $summoner["id"];
+		$lower_name = strtolower($this->name);
+		$this->id = $summoner[$lower_name]["id"];
 	}
 
 	private function extract_support_champions() {

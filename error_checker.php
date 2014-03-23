@@ -26,6 +26,7 @@ try {
 
 //Get summoner stats from League API.
 $api = new riotapi($region);
+$lower_name = strtolower($summoner_name); 
 $summoner_api = $api->getSummonerByName($summoner_name);
 $summoner = json_decode($summoner_api, true);
 
@@ -41,9 +42,9 @@ try {
 
 
 //Store relevant information: ID, name, level. 
-$summoner_api_name = $summoner['name'];
-$id = $summoner['id'];
-$level = $summoner['summonerLevel'];
+$summoner_api_name = $summoner[$lower_name]['name'];
+$id = $summoner[$lower_name]['id'];
+$level = $summoner[$lower_name]['summonerLevel'];
 
 
 //Summoner must exist on League of Legends.

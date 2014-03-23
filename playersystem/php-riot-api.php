@@ -106,7 +106,7 @@ class riotapi {
 		}
 
 		//add API URL to the call
-		$call = self::API_URL_1_2 . $call;
+		$call = self::API_URL_1_3 . $call;
 
 		return $this->request($call);
 	}
@@ -120,7 +120,7 @@ class riotapi {
 		$call = 'summoner/by-name/' . $name;
 
 		//add API URL to the call
-		$call = self::API_URL_1_2 . $call;
+		$call = self::API_URL_1_3 . $call;
 
 		return $this->request($call);
 	}
