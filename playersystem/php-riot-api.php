@@ -31,13 +31,13 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 class riotapi {
 	const API_URL_1_1 = 'http://prod.api.pvp.net/api/lol/{region}/v1.1/';
-	//const API_URL_1_2 = 'http://prod.api.pvp.net/api/lol/{region}/v1.2/';
-	const API_URL_1_2 = 'http://50.18.202.182/api/lol/{region}/v1.2/';
-	//const API_URL_1_3 = 'http://prod.api.pvp.net/api/lol/{region}/v1.3/';
-	const API_URL_1_3 = 'http://54.193.37.205/api/lol/{region}/v1.3/';
+	const API_URL_1_2 = 'http://prod.api.pvp.net/api/lol/{region}/v1.2/';
+	//const API_URL_1_2 = 'http://50.18.202.182/api/lol/{region}/v1.2/';
+	const API_URL_1_3 = 'http://prod.api.pvp.net/api/lol/{region}/v1.3/';
+	//const API_URL_1_3 = 'http://54.193.37.205/api/lol/{region}/v1.3/';
 	const API_URL_2_1 = 'http://prod.api.pvp.net/api/lol/{region}/v2.2/';
-	//const API_URL_2_3 = 'http://prod.api.pvp.net/api/lol/{region}/v2.3/';
-	const API_URL_2_3 = 'http://50.18.202.182/api/lol/{region}/v2.3/';
+	const API_URL_2_3 = 'http://prod.api.pvp.net/api/lol/{region}/v2.3/';
+	//const API_URL_2_3 = 'http://50.18.202.182/api/lol/{region}/v2.3/';
 	
 	const API_KEY = '846b92fa-8063-46c4-9b00-23f4cdae98ac';
 	const RATE_LIMIT_MINUTES = 500;

@@ -5,12 +5,10 @@ include_once('player_system.php');
 include_once('php-riot-api.php');
 
 
-$seed = 'YannTremblay99';
-$region = 'na';
+$seed = '3utanazja';
+$region = 'eune';
 
 recurse_players($seed, $region);
-
-
 
 function recurse_players($name, $region) {
 	$api = new riotapi($region);
@@ -18,7 +16,7 @@ function recurse_players($name, $region) {
 	$summoner_api = $api->getSummonerByName($name);
 	$summoner = json_decode($summoner_api, true);
 	$id = $summoner["id"];
-
+	print_r($summoner);
 
 	$gameStats  = $api->getGame($id);
 	$gameStats= json_decode($gameStats, true);

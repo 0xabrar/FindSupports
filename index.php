@@ -56,7 +56,7 @@
       <div id = "errorMessage"><center>
         <table style="background-color: black; border: 0px; border-radius: 10px; box-shadow: 0px 0px 5px black;" >
           <tr>
-            <td id = "message" style="padding: 5px; color:#B5B5B5;">Error message to display.</td>
+            <td id = "message" style="padding: 5px; color:#B5B5B5;"></td>
           </tr> 
         </table></center>
       </div>
