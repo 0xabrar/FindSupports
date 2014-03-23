@@ -25,6 +25,14 @@ summary {
   font-family: 'Montserrat', sans-serif;
 }
 
+#logo{
+  font-family: 'Quicksand';
+  font-size:5.5em;
+  text-align: center;
+  text-decoration: none;
+  color:white;
+}
+
 #searchButton{
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
