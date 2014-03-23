@@ -8,7 +8,7 @@
   <meta charset="UTF-8">
   <!-- Bootstrap -->  
   <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
-  <link href='http://fonts.googleapis.com/css?family=Cinzel|Montserrat' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Cinzel|Montserrat|Quicksand:300,400,700' rel='stylesheet' type='text/css'>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -20,7 +20,7 @@
   
   <body>
     <style> 
-    body { background: url(/images/results_background.png) no-repeat center center fixed; 
+    body { background: url("/images/results_background.png") no-repeat center center fixed; 
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
@@ -32,7 +32,7 @@
           <div class="center-block">
             <!-- The div that holds the title -->
             <div class="center-block">
-              <a href ="/index.php" class="center-block" id="logo"> Find Me A Support </a>
+              <a href ="/index.php" class="center-block" id="logo"> Find me a support </a>
             </div>
           </div>
         </div>
