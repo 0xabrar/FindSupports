@@ -39,7 +39,7 @@ class riotapi {
 	const API_URL_2_3 = 'http://prod.api.pvp.net/api/lol/{region}/v2.3/';
 	//const API_URL_2_3 = 'http://50.18.202.182/api/lol/{region}/v2.3/';
 	
-	const API_KEY = '846b92fa-8063-46c4-9b00-23f4cdae98ac';
+	const API_KEY = '3f55db6d-6972-481b-87cc-0198ac3609d9';
 	const RATE_LIMIT_MINUTES = 500;
 	const RATE_LIMIT_SECONDS = 10;
 	const CACHE_LIFETIME_MINUTES = 60;
