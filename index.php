@@ -22,7 +22,7 @@
           <div class="center-block">
             <!-- The div that holds the title -->
             <div class="center-block">
-              <a href ="/index.php" class="center-block" id="logo"> Find me a support </a>
+              <a href ="/index.php" class="center-block" id="logo"> Find me a Support </a>
             </div>
           </div>
         </div>
