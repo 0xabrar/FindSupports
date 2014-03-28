@@ -9,7 +9,7 @@ class PlayerDatabaseOperations {
   		Add information into the table. */
 
 	function __construct() {
-		$this->con = mysqli_connect("localhost", "root", "candy12", "summoners");
+		$this->con = mysqli_connect("localhost", "admin", "candy12", "summoners");
 		// Check connection
 		if (!$this->con) {	
 			//TODO: relocate to error page
