@@ -15,9 +15,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
       </head>
-      <body>
-        <style> body {background-image:url("/images/background.png"); background-attachment: fixed; background-repeat: no-repeat; -moz-background-size:100% 100%; background-size:100% 100%; } </style>
-
+      <body id="frontBackground">
         <div class ="container" style="margin-top:20%">
           <div class="center-block">
             <!-- The div that holds the title -->

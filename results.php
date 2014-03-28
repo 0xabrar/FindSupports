@@ -18,21 +18,17 @@
     <![endif]-->
   </head>
   
-  <body>
-    <style> 
-    body { background: url("/images/results_background.png") no-repeat center center fixed; 
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;
-    } 
-    </style>
+  <body id="backBackground">
+      <script> 
+        $(function() {
+        $(document).scrollTop( $("#logo").offset().top );
+       </script> 
 
    <div class ="container" style="margin-top:20%">
           <div class="center-block">
             <!-- The div that holds the title -->
             <div class="center-block">
-              <a href ="/index.php" class="center-block" id="logo"> Find me a Support </a>
+              <a name="title" href ="/index.php" class="center-block" id="logo"> Find me a Support </a>
             </div>
           </div>
         </div>
