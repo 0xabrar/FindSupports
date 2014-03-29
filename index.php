@@ -65,7 +65,7 @@
 
       <br>
       <!-- Error message box -->
-      <div id = "errorMessage"><center>
+      <div id = "errorMessage" style="visibility:hidden;"><center>
         <table style="background-color: black; border: 0px; border-radius: 10px; box-shadow: 0px 0px 5px black;" >
           <tr>
             <td id = "message" style="padding: 5px; color:#B5B5B5;"></td>
@@ -89,12 +89,6 @@
     <script type='text/javascript'>
     //Scripts for handling errors with the user's input.
 
-    //Error message is hidden by default.
-    $(document).ready(function(){
-      $("#errorMessage").hide();
-    });
-
-
     //Call this material when users submit the summoner form.
     $("#summonerForm").submit(function(event) {
       /* stop form from submitting normally */
@@ -116,7 +110,7 @@
   //Based on the error raised, change the error info given.
   function handle_error(error) {
     if (error == 'empty_name') {
-      document.getElementById("message").innerHTML = "Please enter a  summoner name.";
+      document.getElementById("message").innerHTML = "Please enter a summoner name.";
     } else if (error == 'no_summoner') {
       document.getElementById("message").innerHTML = "That is not a valid summoner. Check spelling and region.";
     } else if (error == 'under30') {
@@ -129,7 +123,7 @@
 
   //Display the error box.
   function display_error() {
-    $("#errorMessage").fadeIn(500);
+    $("#errorMessage").css('visibility','visible').hide().fadeIn(500);
     setTimeout(function() {$("#errorMessage").fadeOut(500);}, 2000);
   }
 
