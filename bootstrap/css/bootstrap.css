@@ -38,7 +38,6 @@ background-image: url("/images/modify/backBackground/fiddlesticks.png"), url("/i
   background-repeat: no-repeat; 
   background-position: bottom left, bottom right;
   -moz-background-size:30% 80%, 25% 45%, 100% 100%; background-size:50% 90%, 40% 100%, 100% 100%;
-
 }
 
 #logo{

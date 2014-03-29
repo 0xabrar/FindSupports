@@ -152,6 +152,10 @@ class PlayerSystem {
 		return true;
 	}
 
+	public function get_support_image(&$player) {
+		return strtolower($player->get_most_played_support());
+	}
+
 
 
 	

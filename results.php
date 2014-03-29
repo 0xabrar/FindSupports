@@ -19,10 +19,21 @@
   </head>
   
   <body id="backBackground">
-      <script> 
-        $(function() {
-        $(document).scrollTop( $("#logo").offset().top );
-       </script> 
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" >
+    //Rush to logo on load
+      $(document).ready(function () {
+        // Handler for .ready() called.
+      $('html, body').animate({
+        scrollTop: $('#logo').offset().top
+      }, 'medium');
+    });
+    </script>
 
    <div class ="container" style="margin-top:20%">
           <div class="center-block">
@@ -75,7 +86,7 @@
               $playerSystem = new PlayerSystem($summoner_name, $region);
 
               if ($playerSystem->player_plays_ranked()) {
-                for ($i = 0; $i < 10; $i++) {
+                for ($i = 0; $i < 9; $i++) {
                   $player = $playerSystem->get_player($i);
 
                 //No matching players were found.
@@ -102,7 +113,8 @@
                       echo "<td style=\"vertical-align: middle\"><center>" .$playerWon. "</center></td>";
                       echo "<td style=\"vertical-align: middle\"><center>" .$playerPercent. "</center></td>";
                       echo "<td style=\"vertical-align: middle\"><center>" .$playerAssists. "</center></td>";
-                      echo "<td style=\"vertical-align: middle\"><img src=\"images/champion_icons/janna.png\" height=\"40\" width=\"40\" style=\"margin-left:8%;\"><div style=\"display:inline; margin-left:2em;\">"  .$playerChampion. "</div></td>";
+                      $support_icon = "images/champion_icons/" . $playerSystem->get_support_image($player) . ".png";
+                      echo "<td style=\"vertical-align: middle\"><img src=$support_icon height=\"40\" width=\"40\" style=\"margin-left:8%;\"><div style=\"display:inline; margin-left:2em;\">"  .$playerChampion. "</div></td>";
                       echo "</tr>";       
                     }
                   }
@@ -128,10 +140,6 @@
       include('footer.php')
       ?>
 
-      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-      <script src="https://code.jquery.com/jquery.js\"></script>
-      <!-- Include all compiled plugins (below), or include individual files as needed -->
-      <script src="bootstrap/js/bootstrap.min.js\"></script>
     </body> 
     </html>
 
