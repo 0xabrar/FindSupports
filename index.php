@@ -14,13 +14,28 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-42843057-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
       </head>
+
       <body id="frontBackground">
         <div class ="container" style="margin-top:20%">
           <div class="center-block">
             <!-- The div that holds the title -->
             <div class="center-block">
-              <a href ="/index.php" class="center-block" id="logo"> Find me a Support </a>
+              <a href ="/index.php" class="center-block" id="logo"> Find Me a Support</a>
             </div>
           </div>
         </div>

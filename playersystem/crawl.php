@@ -5,9 +5,9 @@ include_once('player_system.php');
 include_once('php-riot-api.php');
 
 
-$seed = 'FuperSresh';
+$seed = 'LoveJolie';
 $seed = strtolower($seed);
-$region = 'euw';
+$region = 'na';
 
 recurse_players($seed, $region);
 
