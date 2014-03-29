@@ -11,15 +11,10 @@ develop -> localhost testing
 localbranch -> incremental changes
 
 #####Functionality Needed
-1. Improve overall visuals.
-3. Add in details about Twitter, Google Analytics, etc.
-
-#####Sprint Details
-Improve overall visuals:
-- redesign logo
-- get rid of janna on first page
+1. Review feedback and implement new features accordingly. 
 
 #####Changelog
+- v4.0 Live site up with all intended features. (March 29 2014)
 - v3.0 Working system on all regions with error checks. (March 18 2014)
 - v2.2 Updated UI and have properly functional calculations. (March 14 2014)
 - v2.0 Prototype functionality out. (March 12 2014)
