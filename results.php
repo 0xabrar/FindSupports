@@ -26,11 +26,11 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
 
     <script type="text/javascript" >
-    //Rush to logo on load
+    //Rush to logo on load  
       $(document).ready(function () {
         // Handler for .ready() called.
       $('html, body').animate({
-        scrollTop: $('#logo').offset().top
+        scrollTop: $('#logo').offset().top+20
       }, 'medium');
     });
     </script>
@@ -39,9 +39,9 @@
           <div class="center-block">
             <!-- The div that holds the title -->
             <div class="center-block">
-              <a href ="/index.php" class="center-block" id="logo"> Find me a Support </a>
-            </div>
-          </div>
+              <a href ="/index.php" class="center-block" id="logo" style="color:#DBDAD0;"> Find Me a Support </a>
+            </div
+>          </div>
         </div>
     
 
