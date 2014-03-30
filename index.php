@@ -35,7 +35,7 @@
           <div class="center-block">
             <!-- The div that holds the title -->
             <div class="center-block">
-              <a href ="/index.php" class="center-block" id="logo" style="color:#E3E2D5;"> Find Me a Support</a>
+              <a href ="/index.php" class="center-block" id="logo" style="color:#DBDAD0;"> Find Me a Support</a>
             </div>
           </div>
         </div>
