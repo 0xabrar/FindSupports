@@ -114,7 +114,7 @@
                       echo "<td style=\"vertical-align: middle\"><center>" .$playerWon. "</center></td>";
                       echo "<td style=\"vertical-align: middle\"><center>" .$playerPercent. "</center></td>";
                       echo "<td style=\"vertical-align: middle\"><center>" .$playerAssists. "</center></td>";
-                      $support_icon = "images/champion_icons/" . $playerSystem->get_support_image($player) . ".png";
+                      $support_icon = "images/champion_icons/" . $playerSystem->get_support_image($player) . ".jpg";
                       echo "<td style=\"vertical-align: middle\"><img src=$support_icon height=\"40\" width=\"40\" style=\"margin-left:8%;\"><div style=\"display:inline; margin-left:2em;\">"  .$playerChampion. "</div></td>";
                       echo "</tr>";       
                     }
