@@ -26,7 +26,7 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
 
     <script type="text/javascript" >
-    //Rush to logo on load
+    //Rush to logo on load  
       $(document).ready(function () {
         // Handler for .ready() called.
       $('html, body').animate({
